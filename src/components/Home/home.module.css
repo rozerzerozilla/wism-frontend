@@ -1,0 +1,57 @@
+#custom-header {
+  width: 100%;
+  /*height: 80%; */
+}
+#custom-header .overlay {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65%;
+  background: rgba(54, 59, 77, 0.88);
+}
+#custom-header .front-bg {
+  background-image: url("../../assets/home/img/background/counter-back1.jpg");
+  background-repeat: no-repeat;
+}
+.collapse-header {
+  background: #495057;
+  padding: 8px;
+  color: white !important;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.collapse-header .heading-h5 {
+  color: white;
+}
+
+.label {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.custom-input {
+  border-radius: 15px;
+  border: 1px #0c8af8 solid;
+  padding: 4px 12px;
+  background-color: white;
+  height: 22px;
+  width: 100% !important;
+  padding: 20px;
+  box-shadow: 0 0 2px #0074d9;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.custom-input:focus {
+  outline: none;
+  border: 1px solid #0c8af8;
+  box-shadow: 0 0 10px 2px #0074d9;
+}
+.menu-margin-right {
+  margin-left: auto;
+}
