@@ -1,5 +1,8 @@
+import { useState } from "react";
+
 //import { Link } from "react-router-dom";
 const FormLogin = ({ userData, setUserData, onSubmit, isLoading }) => {
+  const [showPassword, setShowPassword] = useState(false)
   return (
     <form onSubmit={onSubmit}>
       <label style={{ color: "white" }}>Your Username</label>
@@ -19,7 +22,7 @@ const FormLogin = ({ userData, setUserData, onSubmit, isLoading }) => {
       <label style={{ color: "white" }}>Your Password</label>
       <div className="mb-3">
         <input
-          type="password"
+          type={showPassword ? "text" :"password"}
           className="form-control"
           placeholder="Your Password"
           name="password"
@@ -28,6 +31,7 @@ const FormLogin = ({ userData, setUserData, onSubmit, isLoading }) => {
             setUserData({ ...userData, password: e.target.value });
           }}
         />
+        <input type="checkbox" onChange={()=>setShowPassword(prevState => !prevState)}/>Show password!
       </div>
       {/* <div className="row">
         <div className="col-6"></div>

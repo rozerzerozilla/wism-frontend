@@ -122,13 +122,13 @@ export const putData =
         setSuccess("data updated successfully!");
       } catch (error) {
         if (error.response) {
-          toast.error(error.response.data.error.message)
-          setErrors(error.response.data.error.message);
+          toast.error(error.response?.data?.error?.message);
+          setErrors(error.response?.data?.error?.message);
         } else if (error.request) {
           toast.error("Something went wrong, please try again later!")
           setErrors("Something went wrong, please try again later!");
         } else {
-          toast.error(error.message)
+          toast.error(error.message);
           setErrors(error.message);
         }
         setIsLoading(false);
@@ -141,13 +141,12 @@ export const deleteData =
       const { data } = await APIs.deleteData(url);
       dispatch({ type: type, payload: data });
       setIsLoading(false);
-      toast.success("Data deleted successfully!")
-      setSuccess("data deleted successfully!");
+      toast.success("Deleted successfully!" + data.message)
+      setSuccess("Deleted successfully!");
     } catch (error) {
-      toast.error(error.response.data.error.message)
       if (error.response) {
-        toast.error(error.response.data.error.message)
-        setErrors(error.response.data.error.message);
+        toast.error(error.response?.data?.error?.message)
+        setErrors(error.response?.data?.error?.message);
       } else if (error.request) {
         toast.error("Something went wrong, please try again later!")
         setErrors("Something went wrong, please try again later!");
@@ -168,7 +167,7 @@ export const getData =
       setIsLoading(false);
     } catch (error) {
       if (error.response) {
-        setErrors(error.response.data.error.message);
+        setErrors(error?.response?.data?.error?.message);
       } else if (error.request) {
         setErrors("Something went wrong, please try again later!");
       } else {
@@ -187,7 +186,7 @@ export const getPData =
       setIsLoading(false);
     } catch (error) {
       if (error.response) {
-        setErrors(error.response.data.error.message);
+        setErrors(error?.response?.data?.error?.message);
       } else if (error.request) {
         setErrors("Something went wrong, please try again later!");
       } else {

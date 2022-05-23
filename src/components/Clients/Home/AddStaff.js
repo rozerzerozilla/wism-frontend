@@ -49,9 +49,9 @@ const AddStaff = () => {
         setIsLoading
       )
     );
-    setUserData({});
+    // setUserData({});
     //window.location.reload();
-    history.replace("/clients/staffs");
+    history.push("/clients/staffs");
   };
 
   const validateForm = () => {
@@ -93,7 +93,7 @@ const AddStaff = () => {
                   </div>
                 )}
 
-                {success && (
+                {/* {success && (
                   <div
                     className="alert alert-success mx-5"
                     role="alert"
@@ -104,7 +104,7 @@ const AddStaff = () => {
                       the details
                     </h5>
                   </div>
-                )}
+                )} */}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddStaff
                     onSubmit={onSubmit}

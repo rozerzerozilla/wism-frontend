@@ -1,7 +1,14 @@
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { useHistory } from "react-router-dom";
 
 const UnauthorizedModal = (props) => {
+    const history = useHistory();
+    const sessionLogout = () => {
+        localStorage.clear();
+        history.replace("/admin/login");
+        //setAccess(true)
+    }
     return (
         < Modal open={true}
             //onClose={closeDelete}
@@ -18,7 +25,7 @@ const UnauthorizedModal = (props) => {
                         <button
                             type="submit"
                             className="btn btn-danger"
-                            onClick={props.sessionLogout}
+                            onClick={sessionLogout}
                         >
                             &nbsp;&nbsp;Ok
                         </button>

@@ -27,12 +27,6 @@ const ClientsHeader = ({ header }) => {
         >
           <div className="ms-md-auto pe-md-3 d-flex align-items-center"></div>
           <ul className="navbar-nav  justify-content-end">
-            <li className="nav-item d-flex align-items-center">
-              <Link className="nav-link text-body font-weight-bold px-0" to="#">
-                <i className="fa fa-user me-sm-1"></i>
-                <span className="d-sm-inline d-none">Hello, {userName}!</span>
-              </Link>
-            </li>
             <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
               <Link
                 to="#"
@@ -55,27 +49,18 @@ const ClientsHeader = ({ header }) => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
+                <i className="fa fa-user me-sm-1 font-weight-bold"></i>
+                <span className="d-sm-inline d-none font-weight-bold">Hello, {userName}!</span>
+                &nbsp;&nbsp;
                 <i className="fa fa-cog cursor-pointer"></i>
               </Link>
               <ul
-                className="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                className="dropdown-menu  dropdown-menu-end  px-2 me-sm-n4"
                 aria-labelledby="dropdownMenuButton"
               >
-                {/* <li className="mb-2">
-                  <Link
-                    className="dropdown-item border-radius-md"
-                    to="/clients/profile"
-                  >
-                    <div className="d-flex py-1">
-                      <div className="d-flex flex-column justify-content-center">
-                        Profile
-                      </div>
-                    </div>
-                  </Link>
-                </li> */}
-                <li className="mb-2" onClick={onLogout}>
+                <li onClick={onLogout}>
                   <Link to="#" className="dropdown-item border-radius-md">
-                    <div className="d-flex py-1">
+                    <div className="d-flex">
                       <div className="d-flex flex-column justify-content-center">
                         Logout
                       </div>

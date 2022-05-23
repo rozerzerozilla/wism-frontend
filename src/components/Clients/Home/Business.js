@@ -7,6 +7,7 @@ import ClientsNavMenu from "./layout/clients.navmenu";
 import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/client.actions";
 import DisplayBusiness from "./support/display.business";
+import UnauthorizedModal from "../../Admin/Home/UnauthorizedModal";
 const ClientBusiness = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -51,17 +52,17 @@ const ClientBusiness = () => {
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <br />
-                  {errors && (
-                    <div
-                      className="alert alert-danger"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {errors === "Unauthorized access!"
-                        ? window.location.reload()
-                        : errors}
+                  {errors && (errors !== "Unauthorized access!" && errors !== "Unauthorized") && (
+                    <div className="d-flex  text-center w-100">
+                      <p className="mx-auto text-danger text-center text-capitalize text-secondary text-md font-weight-bolder opacity-10">
+                        {errors}
+                      </p>
                     </div>
                   )}
+
+                  {errors && (errors === "Unauthorized access!" || errors === "Unauthorized") &&
+                    <UnauthorizedModal/>
+                  }
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">

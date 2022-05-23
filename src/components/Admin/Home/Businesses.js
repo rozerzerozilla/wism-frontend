@@ -7,6 +7,8 @@ import AdminNavMenu from "./layout/admin.navmenu";
 import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/admin.actions";
 import DisplayBusinesses from "./support/display.businesses";
+import UnauthorizedModal from "./UnauthorizedModal";
+
 const AdminBusinesses = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -70,15 +72,17 @@ const AdminBusinesses = () => {
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <br />
-                  {errors && (
-                    <div
-                      className="alert alert-danger"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {errors}
+                  {errors && (errors !== "Unauthorized access!" && errors !== "Unauthorized") && (
+                    <div className="d-flex  text-center w-100">
+                      <p className="mx-auto text-danger text-center text-capitalize text-secondary text-md font-weight-bolder opacity-10">
+                        {errors}
+                      </p>
                     </div>
                   )}
+
+                  {errors && (errors === "Unauthorized access!" || errors === "Unauthorized") &&
+                    <UnauthorizedModal />
+                  }
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">

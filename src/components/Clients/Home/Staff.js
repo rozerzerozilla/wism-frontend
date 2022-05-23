@@ -8,7 +8,12 @@ import ClientsNavMenu from "./layout/clients.navmenu";
 import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/client.actions";
 import DisplayStaff from "./support/display.staff";
+import UnauthorizedModal from "../../Admin/Home/UnauthorizedModal";
+import Modal from "react-responsive-modal";
 const ClientStaff = () => {
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [staffId, setStaffId] = useState('');
+  const [staffName, setStaffName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -48,6 +53,27 @@ const ClientStaff = () => {
     );
   };
 
+  const submitDelete = () => {
+    dispatch(
+      Actions.deleteData(
+        ActionTypes.DELETE_CLIENT_STAFFS,
+        `/home/staff/${staffId}`,
+        setErrors,
+        setSuccess,
+        setIsLoading
+      )
+    );
+    setOpenDeleteModal(false)
+    dispatch(
+      Actions.getData(
+        ActionTypes.GET_CLIENT_STAFFS,
+        "/home/staff",
+        setErrors,
+        setIsLoading
+      )
+    );
+  }
+
   return (
     <>
       <ClientsNavMenu path="staffs" />
@@ -70,16 +96,17 @@ const ClientStaff = () => {
                   </div>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
-                  <br />
-                  {errors && (
-                    <div
-                      className="alert alert-danger"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {errors}
+                  {errors && (errors !== "Unauthorized access!" && errors !== "Unauthorized") && (
+                    <div className="d-flex  text-center w-100">
+                      <p className="mx-auto text-danger text-center text-capitalize text-secondary text-md font-weight-bolder opacity-10">
+                        {errors}
+                      </p>
                     </div>
                   )}
+
+                  {errors && (errors === "Unauthorized access!" || errors === "Unauthorized") &&
+                    <UnauthorizedModal />
+                  }
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">
@@ -91,39 +118,44 @@ const ClientStaff = () => {
                     <table className="table align-items-center mb-0 ">
                       <thead>
                         <tr>
-                          {/* <th className="text-centertext-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          {/* <th className="text-centertext-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Available
                           </th> */}
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10 ps-2">
                             Added
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Name
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Role
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Phone
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Email
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Status
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Action
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {staffs &&
+                        {!isLoading && staffs &&
                           staffs.map((staff) => (
                             <DisplayStaff
                               toggleStaff={toggleStaff}
                               staff={staff}
                               key={staff.id}
+                              handleDelete={(id, name) => {
+                                setStaffId(id)
+                                setStaffName(name)
+                                setOpenDeleteModal(true)
+                              }}
                             />
                           ))}
                       </tbody>
@@ -137,6 +169,34 @@ const ClientStaff = () => {
 
         <ClientsFooter />
       </main>
+      <Modal open={openDeleteModal} onClose={() => setOpenDeleteModal(false)} center>
+        <br />
+        <h5 className="text-center w-100">Are you sure you want to delete<br/>
+          employee: {staffName} ?</h5>
+        <br />
+
+        <div className="row d-flex flex-row">
+          <div className="col-3 ms-auto">
+            <button
+              type="submit"
+              className="btn btn-danger"
+              onClick={() => setOpenDeleteModal(false)}
+            >
+              No
+            </button>
+          </div>
+          <div className="col-3 me-auto">
+            <button
+              className="btn btn-success"
+              onClick={submitDelete}
+            >
+              Yes
+            </button>
+          </div>
+          
+        </div>
+
+      </Modal>
     </>
   );
 };

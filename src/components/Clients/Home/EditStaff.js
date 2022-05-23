@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import ClientsFooter from "./layout/clients.footer";
 import ClientsHeader from "./layout/clients.header";
 import ClientsNavMenu from "./layout/clients.navmenu";
@@ -9,6 +9,7 @@ import * as Actions from "../../../redux/actions/client.actions";
 import FormEditStaff from "./support/form.edit.staff";
 import { AddStaffs } from "../../../helpers/client.joi";
 const EditStaff = () => {
+  const history = useHistory();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -59,8 +60,8 @@ const EditStaff = () => {
         setIsLoading
       )
     );
-    setUserData({});
-    window.location.reload();
+    // setUserData({});
+    // window.location.reload();
   };
 
   const validateForm = () => {
@@ -72,6 +73,12 @@ const EditStaff = () => {
     setErrors("");
     return results.value;
   };
+
+  useEffect(() => {
+    if (success) {
+      history.push("/clients/staffs")
+    }
+  },[success])
 
   useEffect(() => {
     dispatch(
@@ -111,7 +118,7 @@ const EditStaff = () => {
                   </div>
                 )}
 
-                {success && (
+                {/* {success && (
                   <div
                     className="alert alert-success mx-5"
                     role="alert"
@@ -122,7 +129,7 @@ const EditStaff = () => {
                       check the details
                     </h5>
                   </div>
-                )}
+                )} */}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormEditStaff
                     onSubmit={onSubmit}

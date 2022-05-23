@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/client.actions";
 import DisplayStaff from "./support/display.staff";
+import UnauthorizedModal from "../../Admin/Home/UnauthorizedModal";
 const ClientCode = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
@@ -29,15 +30,17 @@ const ClientCode = () => {
       <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <ClientsHeader header="Dashboard" />
         <div className="container mt-4">
-          {errors && (
-            <div
-              className="alert alert-danger"
-              role="alert"
-              style={{ color: "white" }}
-            >
-              {errors}
+          {errors && (errors !== "Unauthorized access!" && errors !== "Unauthorized") && (
+            <div className="d-flex  text-center w-100">
+              <p className="mx-auto text-danger text-center text-capitalize text-secondary text-md font-weight-bolder opacity-10">
+                {errors}
+              </p>
             </div>
           )}
+
+          {errors && (errors === "Unauthorized access!" || errors === "Unauthorized") &&
+            <UnauthorizedModal />
+          }   
           {isLoading && (
             <div className="text-center my-5">
               <div className="spinner-border text-danger" role="status">

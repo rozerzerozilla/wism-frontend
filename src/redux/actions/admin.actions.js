@@ -21,7 +21,7 @@ export const Login =
         history.replace(`/admin/dashboard`);
       } catch (error) {
         if (error.response) {
-          setErrors(error.response.data.error.message);
+          setErrors(error?.response?.data?.error?.message);
         } else if (error.request) {
           setErrors("Something went wrong, please try again later!");
         } else {
@@ -154,7 +154,7 @@ export const getData = (type, url, setErrors, setIsLoading) => async (dispatch) 
     dispatch({ type: type, payload: data, loading: false });
     setIsLoading(false);
   } catch (error) {
-    console.log("Login error", error.response.data.error.message)
+    console.log("Login error", error?.response?.data?.error?.message)
     // toast.error(error.response.data.error.message, "Access is denied")
     // setTimeout(() => {
     //   sessionLogout();

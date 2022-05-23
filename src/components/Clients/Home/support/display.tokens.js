@@ -13,7 +13,7 @@ const DisplayTokens = ({
   return (
     <>
       <div className="col-12">
-        <div className="card mb-4">
+        <div className="mb-4">
           <div className="card-body px-0 pt-0 pb-2">
             <div className="table-responsive p-0 mx-1">
               <table className="table align-items-center mb-0 ">
