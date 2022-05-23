@@ -66,7 +66,7 @@ export const postData =
       try {
         const { data } = await APIs.postData(postData, url);
         dispatch({ type: type, payload: data });
-        //setIsLoading(false);
+        setIsLoading(false);
         console.log("data created successfully");
         setSuccess("data created successfully!");
       } catch (error) {

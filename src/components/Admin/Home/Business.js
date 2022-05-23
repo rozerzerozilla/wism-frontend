@@ -7,6 +7,7 @@ import AdminNavMenu from "./layout/admin.navmenu";
 import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/admin.actions";
 import DisplayBusiness from "./support/display.business";
+import { toast } from "react-toastify";
 const AdminBusiness = () => {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
@@ -37,15 +38,7 @@ const AdminBusiness = () => {
               <div className="mb-4">
                 <div className="px-0 pt-0 pb-2">
                   <br />
-                  {errors && (
-                    <div
-                      className="alert alert-danger"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {errors}
-                    </div>
-                  )}
+                  {errors && toast.error(`${errors}`)}
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">

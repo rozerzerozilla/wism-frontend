@@ -7,6 +7,7 @@ import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/admin.actions";
 import AdminFormUpdateProfile from "./support/form.update.profile";
 import { profile } from "../../../helpers/admin.joi";
+import { toast } from "react-toastify";
 const AdminProfile = () => {
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.admin.profile);
@@ -32,6 +33,10 @@ const AdminProfile = () => {
     const formData = new FormData();
     if (selectedImage) {
       formData.append("image", selectedImage, selectedImage.name);
+    }
+    if (userData.newPassword !== userData.repeatPassword) {
+      toast.error("Password didn't match");
+      return
     }
     formData.append("id", event.target.elements.id.value);
     formData.append("name", userData.name);
@@ -86,24 +91,8 @@ const AdminProfile = () => {
                   <h6>Profile Details</h6>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
-                  {errors && (
-                    <div
-                      className="alert alert-danger"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {errors}
-                    </div>
-                  )}
-                  {success && (
-                    <div
-                      className="alert alert-success"
-                      role="alert"
-                      style={{ color: "white" }}
-                    >
-                      {success}
-                    </div>
-                  )}
+                  {errors && toast.error(errors)}
+                  {success && toast.success(success)}
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">

@@ -8,6 +8,7 @@ import FormAddBusiness from "./support/form.add.business";
 import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
+import { toast } from "react-toastify";
 //const format = "DD-MM-YYYY";
 const AdminAddBusiness = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -267,26 +268,9 @@ const AdminAddBusiness = () => {
                     <div className="col-3"></div>
                   </div>
                 </div>
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    Your Business Added successfully, please visit Business Tab
-                    to check the details
-                  </div>
-                )}
+                {errors && toast.error(errors)}
+                {success && toast.success(success)}
+                
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddBusiness
                     categories={categories}

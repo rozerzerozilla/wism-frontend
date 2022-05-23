@@ -1,3 +1,4 @@
+import { useState } from "react";
 import noImage from "../../../../assets/img/no-image.png";
 const AdminFormUpdateProfile = ({
   profileData,
@@ -9,6 +10,7 @@ const AdminFormUpdateProfile = ({
   onSubmit,
   setSelectedImage,
 }) => {
+  const [show, setShow] = useState(false)
   return (
     <form onSubmit={onSubmit}>
       <input type="hidden" name="id" value={profileData.id || ""} />
@@ -87,7 +89,7 @@ const AdminFormUpdateProfile = ({
         <div className="row">
           <div className="col-4">
             <input
-              type="password"
+              type={show ?"text":"password"}
               className="form-control"
               placeholder="Your Current Password"
               name="password"
@@ -99,7 +101,7 @@ const AdminFormUpdateProfile = ({
           </div>
           <div className="col-4">
             <input
-              type="password"
+              type={show ? "text" : "password"}
               className="form-control"
               placeholder="New Password"
               name="newPassword"
@@ -110,7 +112,7 @@ const AdminFormUpdateProfile = ({
           </div>
           <div className="col-4">
             <input
-              type="password"
+              type={show ? "text" : "password"}
               className="form-control"
               placeholder="New Password Again"
               name="repeatPassword"
@@ -118,6 +120,7 @@ const AdminFormUpdateProfile = ({
                 setUserData({ ...userData, repeatPassword: e.target.value })
               }
             />
+            <input type="checkbox" onChange={()=>setShow(prevState=>!prevState)}/>Show All
           </div>
         </div>
       </div>

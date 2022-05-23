@@ -86,7 +86,7 @@ const ClientStaff = () => {
                 <div className="card-header pb-0">
                   <div className="row">
                     <div className="col-10">
-                      <h6>Business Contents</h6>
+                      <h6>Staffs</h6>
                     </div>
                     <div className="col-2">
                       <Link to="/clients/addstaffs" className="btn btn-primary">
