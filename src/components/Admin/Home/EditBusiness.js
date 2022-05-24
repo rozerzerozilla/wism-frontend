@@ -159,9 +159,9 @@ const AdminEditBusiness = () => {
     }
 
     if (userData.subcategories.length <= 0) {
-      formData.append("subcategories", business.subcategories?.split(','));
+      formData.append("subcategories", business.subcategories?.split(',').join());
     } else {
-      formData.append("subcategories", userData.subcategories);
+      formData.append("subcategories", userData.subcategories.join());
     }
     formData.append("open_all_time", allTime || false);
     formData.append("monday", JSON.stringify(userData.monday));
@@ -171,10 +171,12 @@ const AdminEditBusiness = () => {
     formData.append("friday", JSON.stringify(userData.friday));
     formData.append("saturday", JSON.stringify(userData.saturday));
     formData.append("sunday", JSON.stringify(userData.sunday));
-    if (holidays) {
+    if (holidays.length > 0) {
       const newDates = [];
       holidays.map((date) => newDates.push(date.format()));
       formData.append("holidays", newDates);
+    } else {
+      formData.append("holidays", business.holidays);
     }
     formData.append(
       "holidays_working",
@@ -253,7 +255,7 @@ const AdminEditBusiness = () => {
     dispatch(
       Actions.getData(
         ActionTypes.ADMIN_GET_BUSINESS,
-        `/home/business/${id}`,
+        `/home/business/${id}?view=0`,
         setErrors,
         setIsLoading
       )
@@ -276,62 +278,67 @@ const AdminEditBusiness = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    const datas = { ...userData }
     if (business?.timings) {
-      userData.monday.monday_work_from = business?.timings[0]?.work_from || "";
-      userData.monday.monday_work_to = business?.timings[0]?.work_to || "";
-      userData.monday.monday_break_from =
+      
+      datas.monday.monday_work_from = business?.timings[0]?.work_from || "";
+      datas.monday.monday_work_to = business?.timings[0]?.work_to || "";
+      datas.monday.monday_break_from =
         business?.timings[0]?.break_from || "";
-      userData.monday.monday_break_to = business?.timings[0]?.break_to || "";
+      datas.monday.monday_break_to = business?.timings[0]?.break_to || "";
 
-      userData.tuesday.tuesday_work_from =
+      datas.tuesday.tuesday_work_from =
         business?.timings[1]?.work_from || "";
-      userData.tuesday.tuesday_work_to = business?.timings[1]?.work_to || "";
-      userData.tuesday.tuesday_break_from =
+      datas.tuesday.tuesday_work_to = business?.timings[1]?.work_to || "";
+      datas.tuesday.tuesday_break_from =
         business?.timings[1]?.break_from || "";
-      userData.tuesday.tuesday_break_to = business?.timings[1]?.break_to || "";
+      datas.tuesday.tuesday_break_to = business?.timings[1]?.break_to || "";
 
-      userData.wednesday.wednesday_work_from =
+      datas.wednesday.wednesday_work_from =
         business?.timings[2]?.work_from || "";
-      userData.wednesday.wednesday_work_to =
+      datas.wednesday.wednesday_work_to =
         business?.timings[2]?.work_to || "";
-      userData.wednesday.wednesday_break_from =
+      datas.wednesday.wednesday_break_from =
         business?.timings[2]?.break_from || "";
-      userData.wednesday.wednesday_break_to =
+      datas.wednesday.wednesday_break_to =
         business?.timings[2]?.break_to || "";
 
-      userData.thursday.thursday_work_from =
+      datas.thursday.thursday_work_from =
         business?.timings[3]?.work_from || "";
-      userData.thursday.thursday_work_to = business?.timings[3]?.work_to || "";
-      userData.thursday.thursday_break_from =
+      datas.thursday.thursday_work_to = business?.timings[3]?.work_to || "";
+      datas.thursday.thursday_break_from =
         business?.timings[3]?.break_from || "";
-      userData.thursday.thursday_break_to =
+      datas.thursday.thursday_break_to =
         business?.timings[3]?.break_to || "";
 
-      userData.friday.friday_work_from = business?.timings[4]?.work_from || "";
-      userData.friday.friday_work_to = business?.timings[4]?.work_to || "";
-      userData.friday.friday_break_from =
+      datas.friday.friday_work_from = business?.timings[4]?.work_from || "";
+      datas.friday.friday_work_to = business?.timings[4]?.work_to || "";
+      datas.friday.friday_break_from =
         business?.timings[4]?.break_from || "";
-      userData.friday.friday_break_to = business?.timings[4]?.break_to || "";
+      datas.friday.friday_break_to = business?.timings[4]?.break_to || "";
 
-      userData.saturday.saturday_work_from =
+      datas.saturday.saturday_work_from =
         business?.timings[5]?.work_from || "";
-      userData.saturday.saturday_work_to = business?.timings[5]?.work_to || "";
-      userData.saturday.saturday_break_from =
+      datas.saturday.saturday_work_to = business?.timings[5]?.work_to || "";
+      datas.saturday.saturday_break_from =
         business?.timings[5]?.break_from || "";
-      userData.saturday.saturday_break_to =
+      datas.saturday.saturday_break_to =
         business?.timings[5]?.break_to || "";
 
-      userData.sunday.sunday_work_from = business?.timings[6]?.work_from || "";
-      userData.sunday.sunday_work_to = business?.timings[6]?.work_to || "";
-      userData.sunday.sunday_break_from =
+      datas.sunday.sunday_work_from = business?.timings[6]?.work_from || "";
+      datas.sunday.sunday_work_to = business?.timings[6]?.work_to || "";
+      datas.sunday.sunday_break_from =
         business?.timings[6]?.break_from || "";
-      userData.sunday.sunday_break_to = business?.timings[6]?.break_to || "";
+      datas.sunday.sunday_break_to = business?.timings[6]?.break_to || "";
     }
-    userData.holidays_working.holiday_work_from = business.holiday_work_from;
-    userData.holidays_working.holiday_work_to = business.holiday_work_to;
-
-    console.log(business.holidays?.split(','));
-    setHolidays(business.holidays?.split(','));
+    datas.holidays_working.holiday_work_from = business.holiday_work_from;
+    datas.holidays_working.holiday_work_to = business.holiday_work_to;
+    setuserData(prevState => ({
+      ...prevState,
+      ...datas,
+      subcategories: business.subcategories?.split(',')
+    }))
+    getSubcategories(parseInt(business.category))
   }, [business]);
 
   return (

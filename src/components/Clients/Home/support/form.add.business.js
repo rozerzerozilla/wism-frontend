@@ -110,7 +110,7 @@ const FormAddBusiness = ({
                     value={category.id}
                     key={category.id}
                     selected={
-                      category.name === business.category ? true : false
+                      category.id === business.category ? true : false
                     }
                   >
                     {category.name}

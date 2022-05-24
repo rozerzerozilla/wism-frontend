@@ -20,7 +20,7 @@ const AdminBusiness = () => {
     dispatch(
       Actions.getData(
         ActionTypes.ADMIN_GET_BUSINESS,
-        `/home/business/${id}`,
+        `/home/business/${id}?view=1`,
         setErrors,
         setIsLoading
       )

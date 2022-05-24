@@ -91,8 +91,8 @@ const AdminProfile = () => {
                   <h6>Profile Details</h6>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
-                  {errors && toast.error(errors)}
-                  {success && toast.success(success)}
+                  {/* {errors && toast.error(errors)}
+                  {success && toast.success(success)} */}
                   {isLoading && (
                     <div className="text-center my-5">
                       <div className="spinner-border text-danger" role="status">

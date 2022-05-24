@@ -135,6 +135,7 @@ const FormEditBusiness = ({
                       className="form-check-input"
                       name="subcat[]"
                       type="checkbox"
+                      // checked={userData.subcategories.map(ele => parseInt(ele) === subcat.id).length > 0}
                       value={subcat.id}
                       onChange={(e) => {
                         setuserData({

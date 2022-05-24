@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import businessImage from "../../../../assets/img/business.jpg";
 import { useState, useEffect } from "react";
+import { BsFillCircleFill } from "react-icons/bs";
 const DisplayBusiness = ({ details }) => {
   const [role, setRole] = useState(1);
   useEffect(() => {
@@ -25,7 +26,14 @@ const DisplayBusiness = ({ details }) => {
 
             <div className="col-8 my-auto">
               <div className="h-100">
-                <h5 className="mb-1">{details.bname}</h5>
+                <h5 className="mb-1">{details.bname}&nbsp;&nbsp;
+                  {details.status && (
+                    <span><BsFillCircleFill style={{ color: "green" }} /></span>
+                  )}
+                  {!details.status && (
+                    <span><BsFillCircleFill style={{ color: "orange" }} /></span>
+                  )}
+                </h5>
                 <p
                   className="mb-0 font-weight-bold text-sm"
                   style={{ display: "flex", flexDirection: "column" }}
@@ -49,17 +57,9 @@ const DisplayBusiness = ({ details }) => {
             </div>
             <div className="col-2">
               {role === 1 && (
-                <Link to={`/clients/editbusiness`} className="btn btn-danger">
+                <Link to={`/clients/editbusiness`} className="btn btn-primary">
                   Edit
                 </Link>
-              )}
-
-              <br />
-              {details.status !== 0 && (
-                <button className="btn btn-success">Active</button>
-              )}
-              {!details.status && (
-                <button className="btn btn-warning">In Active</button>
               )}
             </div>
           </div>

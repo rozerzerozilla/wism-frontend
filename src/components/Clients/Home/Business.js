@@ -18,7 +18,7 @@ const ClientBusiness = () => {
     dispatch(
       Actions.getData(
         ActionTypes.GET_CLIENT_BUSINESS,
-        "/home/business",
+        "/home/business?view=1",
         setErrors,
         setIsLoading
       )

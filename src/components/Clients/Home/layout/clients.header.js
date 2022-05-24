@@ -8,8 +8,8 @@ const ClientsHeader = ({ header }) => {
   const userName = userData && userData.name ? userData.name : "Admin";
   const onLogout = () => {
     localStorage.clear();
-    window.location.reload();
     history.replace("/clients/login");
+    window.location.reload();
   };
   return (
     <nav

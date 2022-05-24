@@ -155,9 +155,9 @@ const EditBusiness = () => {
     }
 
     if (userData.subcategories.length <= 0) {
-      formData.append("subcategories", JSON.parse(business.subcategories));
+      formData.append("subcategories", business.subcategories?.split(","));
     } else {
-      formData.append("subcategories", userData.subcategories);
+      formData.append("subcategories", userData.subcategories.join());
     }
 
     formData.append("open_all_time", allTime || false);
@@ -189,9 +189,9 @@ const EditBusiness = () => {
         setIsLoading
       )
     );
-    setuserData({});
-    window.scrollTo(0, 0);
-  };
+    // setuserData({});
+    // window.scrollTo(0, 0);
+  }; 
 
   //validate form
   const validateForm = () => {

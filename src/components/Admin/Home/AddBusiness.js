@@ -9,6 +9,7 @@ import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
 import { toast } from "react-toastify";
+import { Redirect } from "react-router-dom";
 //const format = "DD-MM-YYYY";
 const AdminAddBusiness = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -158,16 +159,17 @@ const AdminAddBusiness = () => {
     formData.append("friday", JSON.stringify(userData.friday));
     formData.append("saturday", JSON.stringify(userData.saturday));
     formData.append("sunday", JSON.stringify(userData.sunday));
-    if (holidays) {
-      const newDates = [];
+    const newDates = [];
+    if (holidays.length > 0) {
       holidays.map((date) => newDates.push(date.format()));
-      formData.append("holidays", newDates);
     }
+    formData.append("holidays", newDates);
     formData.append(
       "holidays_working",
       JSON.stringify(userData.holidays_working)
     );
-    setIsLoading(true);
+    // setIsLoading(true);
+    console.log(userData)
     dispatch(
       Actions.postData(
         ActionTypes.POST_CLIENT_BUSINESS,
@@ -178,7 +180,7 @@ const AdminAddBusiness = () => {
         setIsLoading
       )
     );
-    setuserData({});
+    // setuserData({});
     window.scrollTo(0, 0);
   };
 
@@ -251,6 +253,16 @@ const AdminAddBusiness = () => {
     } catch (e) {}
   };
 
+
+  useEffect(() => {
+    const newDates = [];
+    holidays.map((date) => {
+      console.log(date.format())
+      newDates.push(date.format())
+    });
+    
+  },[holidays])
+
   return (
     <>
       <AdminNavMenu path="business" />
@@ -268,9 +280,9 @@ const AdminAddBusiness = () => {
                     <div className="col-3"></div>
                   </div>
                 </div>
-                {errors && toast.error(errors)}
-                {success && toast.success(success)}
-                
+                {/* {errors && toast.error(errors)} */}
+                {success && <Redirect to="/admin/business"/>}
+
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddBusiness
                     categories={categories}

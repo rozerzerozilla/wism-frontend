@@ -31,7 +31,9 @@ const FormLogin = ({ userData, setUserData, onSubmit, isLoading }) => {
             setUserData({ ...userData, password: e.target.value });
           }}
         />
-        <input type="checkbox" onChange={()=>setShowPassword(prevState => !prevState)}/>Show password!
+        <div className="mt-1"></div>
+        <input type="checkbox" className="form-control-checkbox" onChange={() => setShowPassword(prevState => !prevState)} />
+        <span className="text-white">&nbsp;Show password!</span>
       </div>
       {/* <div className="row">
         <div className="col-6"></div>

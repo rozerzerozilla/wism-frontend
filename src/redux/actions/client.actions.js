@@ -89,6 +89,7 @@ export const Login =
 export const postData =
   (type, url, postData, setErrors, setSuccess, setIsLoading) =>
     async (dispatch) => {
+      console.log("postdata")
       try {
         const { data } = await APIs.postData(postData, url);
         dispatch({ type: type, payload: data });
