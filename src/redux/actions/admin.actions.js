@@ -150,7 +150,7 @@ export const deleteData = (type, url, setErrors, setSuccess, setIsLoading) => as
 export const getData = (type, url, setErrors, setIsLoading) => async (dispatch) => {
   try {
     const { data } = await APIs.getData(url);
-    console.log('for business edit', data)
+    // console.log('for business edit', data)
     dispatch({ type: type, payload: data, loading: false });
     setIsLoading(false);
   } catch (error) {

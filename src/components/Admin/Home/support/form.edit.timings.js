@@ -858,10 +858,10 @@ const FormEditTimings = ({
               width: "100%",
             }}
           />
-          {/* <br />
+          <br />
           <p>
             Chosen Holidays : {business.holidays && <>{business.holidays}</>}
-          </p> */}
+          </p>
         </div>
       </div>
       <div className="row my-2 mt-4">

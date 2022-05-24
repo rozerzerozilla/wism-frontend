@@ -20,7 +20,6 @@ const FormEditBusiness = ({
   allTime,
   setAllTime,
   getLatLng,
-  success,
   business,
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
@@ -102,14 +101,14 @@ const FormEditBusiness = ({
                 getSubcategories(e.target.value);
               }}
             >
-              <option value="">Choose Category</option>
+              <option value="" defaultValue={""}>Choose Category</option>
               {categories &&
                 categories.map((category) => (
                   <option
                     value={category.id}
                     key={category.id}
                     selected={
-                      category.name === business.category ? true : false
+                      category.id === business.category ? true : false
                     }
                   >
                     {category.name}
@@ -600,16 +599,6 @@ const FormEditBusiness = ({
           setAllTime={setAllTime}
           business={business}
         />
-      )}
-
-      {success && (
-        <div
-          className="alert alert-success mx-5"
-          role="alert"
-          style={{ color: "white" }}
-        >
-          {success}
-        </div>
       )}
 
       <div className="text-center">

@@ -8,6 +8,7 @@ import FormEditBusiness from "./support/form.edit.business";
 import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
+import { Redirect } from "react-router-dom";
 const AdminEditBusiness = () => {
   const { id } = useParams();
   const storedData = JSON.parse(localStorage.getItem("userData"));
@@ -158,7 +159,7 @@ const AdminEditBusiness = () => {
     }
 
     if (userData.subcategories.length <= 0) {
-      formData.append("subcategories", JSON.parse(business.subcategories));
+      formData.append("subcategories", business.subcategories?.split(','));
     } else {
       formData.append("subcategories", userData.subcategories);
     }
@@ -180,6 +181,8 @@ const AdminEditBusiness = () => {
       JSON.stringify(userData.holidays_working)
     );
     setIsLoading(true);
+    formData.forEach(ele => console.log(ele))
+    
     dispatch(
       Actions.postData(
         ActionTypes.POST_CLIENT_BUSINESS,
@@ -190,8 +193,8 @@ const AdminEditBusiness = () => {
         setIsLoading
       )
     );
-    setuserData({});
-    window.scrollTo(0, 0);
+    // setuserData({});
+    // window.scrollTo(0, 0);
   };
 
   //validate form
@@ -326,6 +329,9 @@ const AdminEditBusiness = () => {
     }
     userData.holidays_working.holiday_work_from = business.holiday_work_from;
     userData.holidays_working.holiday_work_to = business.holiday_work_to;
+
+    console.log(business.holidays?.split(','));
+    setHolidays(business.holidays?.split(','));
   }, [business]);
 
   return (
@@ -337,25 +343,6 @@ const AdminEditBusiness = () => {
           <div className="row">
             <div className="col-12">
               <div className="card mb-4">
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    <h5>Successfully updated the business</h5>
-                  </div>
-                )}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormEditBusiness
                     categories={categories}
@@ -386,6 +373,7 @@ const AdminEditBusiness = () => {
 
         <AdminFooter />
       </main>
+      {success && <Redirect to={`/admin/business/${id}`}/>}
     </>
   );
 };
