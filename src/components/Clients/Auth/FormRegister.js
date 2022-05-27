@@ -1,4 +1,14 @@
-const FormRegister = ({ userData, setUserData, onSubmit, isLoading }) => {
+
+
+const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp }) => {
+
+
+
+  let form = <></>
+  if (validateOtp) {
+    form = <></>
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <label style={{ color: "white" }}>Your Name</label>

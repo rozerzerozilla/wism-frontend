@@ -15,12 +15,15 @@ const ClientRegister = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [validateOtp, setValidateOtp] = useState(false);
+  const [otpSend, setOTPSend] = useState(false)
   const [errors, setErrors] = useState(false);
   const [success, setSuccess] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     phone: "",
     password: "",
+    otp: "",
   });
   const onSubmit = (event) => {
     event.preventDefault();
@@ -95,6 +98,7 @@ const ClientRegister = () => {
                         </div>
                       )}
                       <FormRegister
+                        validateOtp={validateOtp}
                         userData={userData}
                         setUserData={setUserData}
                         onSubmit={onSubmit}
