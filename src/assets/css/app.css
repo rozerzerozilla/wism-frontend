@@ -20668,6 +20668,10 @@ hr.horizontal.gray-light {
   z-index: 1020;
 }
 
+.z-index-nav-sticky {
+  z-index: 10;
+}
+
 .waves {
   position: relative;
   width: 100%;
@@ -25375,4 +25379,8 @@ pre[class*="language-"] {
 
 .color-gray {
   color: gray;
+}
+
+.content-view{
+  min-height: calc(100vh - 160px);
 }

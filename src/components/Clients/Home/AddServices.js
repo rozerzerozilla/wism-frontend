@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ClientsFooter from "./layout/clients.footer";
 import ClientsHeader from "./layout/clients.header";
 import ClientsNavMenu from "./layout/clients.navmenu";
@@ -8,6 +8,7 @@ import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/client.actions";
 import { AddService } from "../../../helpers/client.joi";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 const ClientAddService = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -50,6 +51,15 @@ const ClientAddService = () => {
     return results.value;
   };
 
+  useEffect(() => {
+    if (success !== false && success !== "" && success !== null) {
+      toast.error(success)
+    }
+    if(errors !== false && errors !== "" && errors !== null) {
+      toast.error(errors)
+    }
+  },[success, errors])
+
   return (
     <>
       <ClientsNavMenu path="services" />
@@ -62,28 +72,6 @@ const ClientAddService = () => {
                 <div className="card-header pb-0">
                   <h6>Add Service</h6>
                 </div>
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    <h5 style={{ color: "white" }}>
-                      Service Added successfully, please visit Service Tab to
-                      check the details
-                    </h5>
-                  </div>
-                )}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddServices
                     onSubmit={onSubmit}

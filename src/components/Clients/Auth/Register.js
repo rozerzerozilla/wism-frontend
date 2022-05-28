@@ -11,6 +11,8 @@ import AuthHeader from "./AuthHeader";
 import AuthFooter from "./AuthFooter";
 import LoginBg from "../../../assets/img/login_bg.jpg";
 import FormRegister from "./FormRegister";
+import axios from "axios";
+import {URL} from "../../../api/clients.api"
 const ClientRegister = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ const ClientRegister = () => {
   const [otpSend, setOTPSend] = useState(false)
   const [errors, setErrors] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [otp, setOtp] = useState('');
+  const [validateUrlId, setValidateUrlId] = useState('');
   const [userData, setUserData] = useState({
     name: "",
     phone: "",
@@ -27,20 +31,45 @@ const ClientRegister = () => {
   });
   const onSubmit = (event) => {
     event.preventDefault();
-    const validInputs = validateForm();
-    if (!validInputs) return null;
     setIsLoading(true);
-    dispatch(
-      Register(
-        ActionTypes.REGISTER,
-        "/auth/register",
-        userData,
-        setErrors,
-        setSuccess,
-        setIsLoading,
-        history
-      )
-    );
+    if (otpSend) {
+      axios.post(URL + '/auth/phone/validate-otp/' + validateUrlId,
+        { "phone": userData.phone, otp: userData.otp }).then(res => {
+          setOTPSend(false)
+          setValidateOtp(true);
+          setIsLoading(false);
+      }).catch(error => {
+        setValidateOtp(false);
+        setIsLoading(false);
+      })
+    } else if (validateOtp) {
+      console.log('Regiter')
+      const validInputs = validateForm();
+      if (!validInputs) return null;
+      // dispatch(
+      //   Register(
+      //     ActionTypes.REGISTER,
+      //     "/auth/register",
+      //     userData,
+      //     setErrors,
+      //     setSuccess,
+      //     setIsLoading,
+      //     history
+      //   )
+      // );
+    } else {
+      axios.post(URL + '/auth/phone/otp', { "phone": userData.phone }).then(res => {
+        setUserData(prevState => ({ ...prevState, otp: res.data.otp }))
+        setValidateUrlId(res.data.id)
+        setOTPSend(true)
+        setIsLoading(false)
+      }).catch(error => {
+        setOTPSend(false);
+        setIsLoading(false);
+      })
+    }
+    
+    
   };
 
   const validateForm = () => {
@@ -98,6 +127,7 @@ const ClientRegister = () => {
                         </div>
                       )}
                       <FormRegister
+                        otpSend={otpSend}
                         validateOtp={validateOtp}
                         userData={userData}
                         setUserData={setUserData}

@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator from 'validator';
 import axios from "axios";
+import {URL} from "../../../../api/admin.api"
 
 const DisplayEmployees = ({ staff }) => {
 
@@ -121,7 +122,7 @@ const DisplayEmployees = ({ staff }) => {
     })
   }
   const submitDelete = (id) => {
-    axios.delete(`https://api.wism.in/api/admin/home/employee/${staff.id}`).then(res => {
+    axios.delete(`${URL}/home/employee/${staff.id}`).then(res => {
       toast.success("deleted Successfully")
       setTimeout(() => {
         window.location.reload();

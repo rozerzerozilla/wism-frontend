@@ -41,12 +41,12 @@ const AdminCategories = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    if (validator.isNumeric(catname)) {
+    if (!validator.isAlpha(category)) {
       InvalidCategoryError();
       setIsLoading(false);
-    }
-    else if (catname.includes("") || catname.includes(" ")) {
-      setEdit(false);
+      return null
+    } else if (catname.includes("") || catname.includes(" ")) {
+      
       dispatch(
         Actions.patchData(
           ActionTypes.PATCH_CATEGORY,
@@ -57,9 +57,9 @@ const AdminCategories = () => {
           setIsLoading
         )
       );
-
       if (errors === true) {
         categoryError();
+        setEdit(false);
       }
       else {
         categoryUpdated();
@@ -138,8 +138,7 @@ const AdminCategories = () => {
 
   const categoryAdded = () => toast.success('Category added successfully');
   const categoryError = () => toast.error('Error! failed to create category');
-  const duplicateCategoryError = () => toast.error('Error! the category exists');
-  const InvalidCategoryError = () => toast.error('Error! category cannot have numbers');
+  const InvalidCategoryError = () => toast.error('Category cannot have numbers(0-9) or special characters($%#@&*...)');
 
   const addCategory = (event) => {
     event.preventDefault();
@@ -148,13 +147,14 @@ const AdminCategories = () => {
       cat => cat.name.toLowerCase() === category.toLowerCase()
     )
 
-    if (duplicateCategory.length > 0) {
-      duplicateCategoryError();
-      setIsLoading(false);
-    }
-    else if (validator.isAlpha(category)) {
+    if (!validator.isAlpha(category)) {
       InvalidCategoryError();
       setIsLoading(false);
+      return null
+    } else if (duplicateCategory.length > 0) {
+      toast.error('Error! the category exists');
+      setIsLoading(false);
+      return null
     }
     else {
       dispatch(
@@ -167,24 +167,25 @@ const AdminCategories = () => {
           setIsLoading
         )
       );
+      
       setTimeout(() => {
         dispatch(
           Actions.getData(
             ActionTypes.GET_CATEGORIES,
             "/home/categories",
             setErrors,
-            setIsLoading
+            // setIsLoading
           )
         );
-      }, 200)
+      }, 3000)
 
       if (errors) {
         categoryError();
       }
       else {
         categoryAdded();
+        setcategory("");
       }
-      setcategory("");
 
     }
   };
@@ -205,6 +206,9 @@ const AdminCategories = () => {
     );
   }, [dispatch]);
 
+  const handleChangeInput = (e) => {
+    setcategory(e.target.value)
+  }
 
   return (
     <>
@@ -226,7 +230,7 @@ const AdminCategories = () => {
                           placeholder="Category Name"
                           className="form-control"
                           name="name"
-                          onChange={(e) => setcategory(e.target.value)}
+                          onChange={handleChangeInput}
                           required
                         />
                       </div>

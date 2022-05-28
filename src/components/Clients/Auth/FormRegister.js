@@ -1,16 +1,50 @@
 
 
-const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp }) => {
+const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp, otpSend }) => {
 
 
 
-  let form = <></>
-  if (validateOtp) {
-    form = <></>
-  }
-
-  return (
-    <form onSubmit={onSubmit}>
+  let form = <>
+    <label style={{ color: "white" }}>
+      Your Phone Number (OTP will sent to this number)
+    </label>
+    <div className="mb-3">
+      <input
+        type="number"
+        className="form-control"
+        placeholder="Phone"
+        name="phone"
+        onChange={(e) => {
+          setUserData({
+            ...userData,
+            phone: e.target.value,
+          });
+        }}
+      />
+    </div>
+  </>
+  if (otpSend) {
+    form = <>
+      <label style={{ color: "white" }}>
+        Enter OTP that has been send to your mobile number (Don't Refresh)
+      </label>
+      <div className="mb-3">
+        <input
+          type="number"
+          className="form-control"
+          placeholder="Enter OTP"
+          name="text"
+          onChange={(e) => {
+            setUserData({
+              ...userData,
+              otp: e.target.value,
+            });
+          }}
+        />
+      </div>
+    </>
+  } else if (validateOtp) {
+    form = <>
       <label style={{ color: "white" }}>Your Name</label>
       <div className="mb-3">
         <input
@@ -23,25 +57,26 @@ const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp 
           }}
         />
       </div>
-      <label style={{ color: "white" }}>
-        Your Phone Number (OTP will sent to this number)
-      </label>
+      <label style={{ color: "white" }}>Your Password</label>
       <div className="mb-3">
         <input
-          type="number"
+          type="text"
           className="form-control"
-          placeholder="Phone"
-          name="phone"
+          placeholder="Your Password"
+          name="password"
           onChange={(e) => {
-            setUserData({
-              ...userData,
-              phone: e.target.value,
-              password: e.target.value,
-            });
+            setUserData({ ...userData, password: e.target.value });
           }}
         />
       </div>
+    </>
+  } else {
 
+  }
+
+  return (
+    <form onSubmit={onSubmit}>
+      {form}
       <div className="text-center">
         <button
           type="submit"
@@ -55,7 +90,7 @@ const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp 
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;Register
+          &nbsp;&nbsp;{otpSend ? 'Verify' : validateOtp ? 'Register' : "Send OTP"}
         </button>
       </div>
     </form>

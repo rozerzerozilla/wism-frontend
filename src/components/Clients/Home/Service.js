@@ -173,22 +173,22 @@ const ClientService = () => {
                     <table className="table align-items-center mb-0 ">
                       <thead>
                         <tr>
-                          <th className="text-centertext-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-centertext-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Name
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10 ps-2">
                             Description
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Prefix
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Service Time
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Staffs
                           </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                          <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                             Actions
                           </th>
                         </tr>

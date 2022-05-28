@@ -5,7 +5,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
       <div className="mb-3">
         <div className="row">
           <div className="col-4">
-            <label className={style.label}>Service Name *</label>
+            <label className={style.label}>Service Name <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
@@ -19,7 +19,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
             />
           </div>
           <div className="col-4">
-            <label className={style.label}>Token Prefix *</label>
+            <label className={style.label}>Token Prefix <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
@@ -33,7 +33,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
             />
           </div>
           <div className="col-4">
-            <label className={style.label}>Default Service Time *</label>
+            <label className={style.label}>Default Service Time <span className="text-danger">*</span></label>
             <input
               type="text"
               className="form-control"
@@ -51,7 +51,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
       <div className="mb-3">
         <div className="row">
           <div className="col-12">
-            <label className={style.label}>Description</label>
+            <label className={style.label}>Description <span className="text-danger">*</span></label>
             <textarea
               placeholder="Service Description(60 chars max)"
               name="description"

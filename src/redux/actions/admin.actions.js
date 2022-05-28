@@ -155,10 +155,6 @@ export const getData = (type, url, setErrors, setIsLoading) => async (dispatch) 
     setIsLoading(false);
   } catch (error) {
     console.log("Login error", error?.response?.data?.error?.message)
-    // toast.error(error.response.data.error.message, "Access is denied")
-    // setTimeout(() => {
-    //   sessionLogout();
-    // }, 2000)
     if (error.response) {
       setErrors(error.response.data.error.message);
     } else if (error.request) {

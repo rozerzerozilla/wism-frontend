@@ -13,7 +13,7 @@ const AdminHeader = ({ header }) => {
   };
   return (
     <nav
-      className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl blur shadow-blur mt-4 left-auto top-1 z-index-sticky"
+      className="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl blur shadow-blur mt-4 left-auto top-1 z-index-nav-sticky"
       id="navbarBlur"
       navbar-scroll="true"
     >
