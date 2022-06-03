@@ -67,9 +67,11 @@ export const postData =
         const { data } = await APIs.postData(postData, url);
         dispatch({ type: type, payload: data });
         setIsLoading(false);
-        console.log("data created successfully");
+        console.log("data created successfully", data);
+        // toast.success("data created succesffuly");
         setSuccess("data created successfully!");
       } catch (error) {
+        setSuccess(false);
         console.log("error", error);
         setErrors(error.response.data.error.message);
         if (error.response.data.error.message) {
@@ -109,12 +111,13 @@ export const putData =
 export const patchData =
   (type, url, postData, setErrors, setSuccess, setIsLoading) =>
     async (dispatch) => {
+      console.log(type, url, postData, setErrors, setSuccess, setIsLoading, dispatch)
       try {
         const { data } = await APIs.patchData(postData, url);
         dispatch({ type: type, payload: data });
         setIsLoading(false);
         setSuccess("data updated successfully!");
-        toast.success("data updated successfully!")
+        toast.success("data updated successfully!");
       } catch (error) {
         if (error.response) {
           setErrors(error.response.data.error.message);

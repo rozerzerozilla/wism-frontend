@@ -52,8 +52,8 @@ const AddBusinessStaff = () => {
         setIsLoading
       )
     );
-    setUserData({});
-    history.replace(`/admin/business/${id}`);
+    // setUserData({});
+    history.push(`/admin/business/${id}`);
   };
 
   const validateForm = () => {

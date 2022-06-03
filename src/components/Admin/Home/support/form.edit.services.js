@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 
 import axios from 'axios';
 import validator from "validator";
@@ -61,6 +61,12 @@ function EditServices({ openModal, handleClose, serviceId, services }) {
             )
         );
     }
+
+    useEffect(() => {
+        if (success) {
+            handleClose()
+        }
+    }, [success])
     
   return (
       <Modal open={openModal} onClose={handleClose} center>

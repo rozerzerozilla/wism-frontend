@@ -105,7 +105,7 @@ const AdminSubCategories = () => {
   const subcategoryUpdated = () => toast.success('Subcategory updated successfully');
   const subcategoryDeleted = () => toast.success('Subcategory deleted');
   const SubcategoryError = (action) => toast.error(`Error! failed to ${action} subcategory`);
-  const subcategoryAdded = () => toast.success('Sub category added successfully');
+  // const subcategoryAdded = () => toast.success('Sub category added successfully');
   const InputFieldError = (fieldname) => toast.error(`Error! enter valid ${fieldname}`);
 
   const addSubCategory = (event) => {
@@ -128,9 +128,6 @@ const AdminSubCategories = () => {
           setIsLoading
         )
       );
-      setTimeout(() => {
-        subcategoryAdded();
-      }, 200)
       setTimeout(() => {
         dispatch(
           Actions.getData(
@@ -198,7 +195,7 @@ const AdminSubCategories = () => {
       SubcategoryError("update");
     }
     else {
-      subcategoryUpdated();
+      // subcategoryUpdated();
     }
     setEdit(false);
     setSubcatId(null)
