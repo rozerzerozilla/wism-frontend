@@ -25,7 +25,7 @@ const AdminBusiness = () => {
         setIsLoading
       )
     );
-  }, [dispatch, history]);
+  }, [dispatch, history, id]);
 
   return (
     <>

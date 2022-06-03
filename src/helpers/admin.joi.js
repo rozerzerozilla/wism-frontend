@@ -72,8 +72,8 @@ export const profile = Joi.object({
 });
 
 export const AddBusiness = Joi.object({
-  name: Joi.string().required().min(3).max(55).trim(),
-  phone: Joi.string().required().min(10).max(13).trim(),
+  name: Joi.string().required().min(3).max(55).trim().replace(/ /g, ""),
+  phone: Joi.string().required().min(10).max(13).trim().replace(/ /g, ""),
   bname: Joi.string().required().min(3).max(100).trim().label("Business Name"),
   telephone: Joi.string()
     .required()

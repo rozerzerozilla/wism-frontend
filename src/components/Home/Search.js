@@ -95,8 +95,8 @@ const Search = () => {
       Actions.getData(
         ActionTypes.PUBLIC_GET_BUSINESSES,
         `/search?cat=${cat ? cat : ""}&subcat=${subCat ? subCat : ""}&city=${
-          inputCity ? inputCity : ""
-        }&dist=${inputDist ? inputDist : ""}&business=${
+          inputCity ? inputCity : "Bangalore Urban"
+        }&dist=${inputDist ? inputDist : "Bangalore"}&business=${
           inBusiness ? inBusiness : ""
         }&lat=${inLat ? inLat : ""}&lng=${inLng ? inLng : ""}`,
         setErrors,
@@ -135,6 +135,10 @@ const Search = () => {
       });
     } catch (e) {}
   }, [dispatch]);
+
+  useEffect(() => {
+    console.log(cityName);
+  }, [cityName])
 
   return (
     <div className="container-fuild" style={{ backgroundColor: "white" }}>

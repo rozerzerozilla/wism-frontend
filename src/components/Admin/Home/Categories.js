@@ -41,7 +41,7 @@ const AdminCategories = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    if (!validator.isAlpha(category)) {
+    if (!validator.isAlpha(catname.replace(/ /g, ""))) {
       InvalidCategoryError();
       setIsLoading(false);
       return null
@@ -63,18 +63,18 @@ const AdminCategories = () => {
       }
       else {
         categoryUpdated();
-        setTimeout(() => {
-          window.location.reload()
-        }, 200)
+        // setTimeout(() => {
+        //   window.location.reload()
+        // }, 200)
 
-        // dispatch(
-        //   Actions.getData(
-        //     ActionTypes.GET_CATEGORIES,
-        //     "/home/categories",
-        //     setErrors,
-        //     setIsLoading
-        //   )
-        // );
+        dispatch(
+          Actions.getData(
+            ActionTypes.GET_CATEGORIES,
+            "/home/categories",
+            setErrors,
+            setIsLoading
+          )
+        );
       }
       setCatId(null)
       setCatname("")
@@ -146,8 +146,8 @@ const AdminCategories = () => {
     let duplicateCategory = categories.filter(
       cat => cat.name.toLowerCase() === category.toLowerCase()
     )
-
-    if (!validator.isAlpha(category)) {
+    // console.log(category.replace(/ /g, ""))
+    if (!validator.isAlpha(category.replace(/ /g, ""))) {
       InvalidCategoryError();
       setIsLoading(false);
       return null
@@ -174,7 +174,7 @@ const AdminCategories = () => {
             ActionTypes.GET_CATEGORIES,
             "/home/categories",
             setErrors,
-            // setIsLoading
+            setIsLoading
           )
         );
       }, 3000)

@@ -54,10 +54,14 @@ const Home = () => {
     );
   };
 
+  useEffect(() => {
+    console.log(cityName);
+  }, [cityName])
+
   const filterForm = (event) => {
     event.preventDefault();
     const checkCity = city ? city : cityName?.address?.city || "";
-    const checkDist = dist ? dist : 5;
+    const checkDist = dist ? cityName?.address?.city : 5;
     const checkBusiness = inputBusiness ? inputBusiness : "";
     history.push(
       `/search??business=${checkBusiness}&cat=${categoryID}&subcat=${subcategoryID}&city=${checkCity}&dist=${checkDist}&lat=${location.lat}&lng=${location.lng}`

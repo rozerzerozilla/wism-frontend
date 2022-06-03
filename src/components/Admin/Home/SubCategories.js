@@ -170,7 +170,8 @@ const AdminSubCategories = () => {
         `/home/subcategory/${subcatId}`,
         { subcategory: subcatname, category_id: catId },
         setErrors,
-        setSuccess
+        setSuccess,
+        setIsLoading,
       )
     );
     setTimeout(() => {

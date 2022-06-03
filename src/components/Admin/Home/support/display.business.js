@@ -3,7 +3,25 @@ import businessImage from "../../../../assets/img/business.jpg";
 import DisplayServices from "./display.services";
 import DisplayStaff from "./display.staff";
 import { BsFillCircleFill } from "react-icons/bs";
+import React from "react";
+import EditServices from "./form.edit.services";
+
 const DisplayBusiness = ({ details, id }) => {
+  const [openEditModal, setOpenEditModal] = React.useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
+  const [serviceId, setServiceID] = React.useState("");
+  const [service, setServices] = React.useState(null);
+  // console.log(details)
+
+  const handleOpenEditModal = (data, id) => {
+    setServices(data)
+    setOpenEditModal(true);
+    setServiceID(id);
+  }
+  const handleOpenDeleteModal = (id) => {
+    setOpenDeleteModal(true);
+    setServiceID(id);
+  }
   return (
     <>
       <div className="container-fluid mx-1 my-3 mt-5">
@@ -120,13 +138,13 @@ const DisplayBusiness = ({ details, id }) => {
                 <h6 className="mb-0">Timing</h6>
               </div>
               <div className="card-body p-3">
-                {details.open_all_time && (
+                {details.open_all_time === 1 && (
                   <div className="row">
                     <h5>Opens All the Time</h5>
                   </div>
                 )}
 
-                {!details.open_all_time && (
+                {details.open_all_time === 0 && (
                   <>
                     <div className="row">
                       <div className="col-4">Day</div>
@@ -193,27 +211,35 @@ const DisplayBusiness = ({ details, id }) => {
                 <table className="table align-items-center mb-0 ">
                   <thead>
                     <tr>
-                      <th className="text-centertext-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-centertext-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Name
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10 ps-2">
                         Description
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Prefix
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Service Time
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Staffs
+                      </th>
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
+                        Actions
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {details.services &&
                       details.services.map((service) => (
-                        <DisplayServices service={service} key={service.id} />
+                        <DisplayServices
+                          service={service}
+                          key={service.id}
+                          handleOpenEditModal={handleOpenEditModal}
+                          handleOpenDeleteModal={handleOpenDeleteModal}
+                        />
                       ))}
                   </tbody>
                 </table>
@@ -226,12 +252,12 @@ const DisplayBusiness = ({ details, id }) => {
       <div className="col-12 mt-3">
         <div className="card h-100">
           <div className=" ps-3 pb-0 pe-3 pt-3 d-flex justify-content-between w-100">
-            <h6 className="mb-0">Employess</h6>
+            <h6 className="mb-0">Staff</h6>
             <Link
               to={`/admin/business/emp/${id}`}
               className="btn btn-primary"
             >
-              Add Employee
+              Add Staff
             </Link>
           </div>
           <div className="card-body p-3">
@@ -240,23 +266,26 @@ const DisplayBusiness = ({ details, id }) => {
                 <table className="table align-items-center mb-0 ">
                   <thead>
                     <tr>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10 ps-2">
                         Added
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Name
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Role
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Phone
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Email
                       </th>
-                      <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
                         Status
+                      </th>
+                      <th className="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
+                        Actions
                       </th>
                     </tr>
                   </thead>
@@ -272,6 +301,12 @@ const DisplayBusiness = ({ details, id }) => {
           </div>
         </div>
       </div>
+      <EditServices
+        serviceId={serviceId}
+        services={service}
+        openModal={openEditModal}
+        handleClose={() => setOpenEditModal(false)}
+      />
     </>
   );
 };

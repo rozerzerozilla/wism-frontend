@@ -56,7 +56,7 @@ const FormAddBusiness = ({
               name="phone"
               value={userData.phone || ""}
               onChange={(e) => {
-                setuserData({ ...userData, phone: e.target.value });
+                setuserData({ ...userData, phone: (e.target.value).replace(/ /g, "") });
               }}
               required
             />
@@ -252,7 +252,7 @@ const FormAddBusiness = ({
                 name="address1"
                 value={userData.address1 || ""}
                 onChange={(e) => {
-                  setuserData({ ...userData, address1: e.target.value });
+                  setuserData({ ...userData, address1: (e.target.value).replace(/ /g,"") });
                 }}
                 required
               />
@@ -462,7 +462,7 @@ const FormAddBusiness = ({
           {success}
         </div>
       )}
-      {errors && (
+      {/* {errors && (
         <div
           className="alert alert-danger mx-5"
           role="alert"
@@ -470,7 +470,7 @@ const FormAddBusiness = ({
         >
           {errors}
         </div>
-      )}
+      )} */}
       <div className="text-center">
         <button
           type="submit"

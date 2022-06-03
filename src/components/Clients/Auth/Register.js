@@ -27,48 +27,59 @@ const ClientRegister = () => {
     name: "",
     phone: "",
     password: "",
-    otp: "",
+    // otp: "",
   });
   const onSubmit = (event) => {
     event.preventDefault();
     setIsLoading(true);
-    if (otpSend) {
-      axios.post(URL + '/auth/phone/validate-otp/' + validateUrlId,
-        { "phone": userData.phone, otp: userData.otp }).then(res => {
-          setOTPSend(false)
-          setValidateOtp(true);
-          setIsLoading(false);
-      }).catch(error => {
-        setValidateOtp(false);
-        setIsLoading(false);
-      })
-    } else if (validateOtp) {
-      console.log('Regiter')
-      const validInputs = validateForm();
-      if (!validInputs) return null;
-      // dispatch(
-      //   Register(
-      //     ActionTypes.REGISTER,
-      //     "/auth/register",
-      //     userData,
-      //     setErrors,
-      //     setSuccess,
-      //     setIsLoading,
-      //     history
-      //   )
-      // );
-    } else {
-      axios.post(URL + '/auth/phone/otp', { "phone": userData.phone }).then(res => {
-        setUserData(prevState => ({ ...prevState, otp: res.data.otp }))
-        setValidateUrlId(res.data.id)
-        setOTPSend(true)
-        setIsLoading(false)
-      }).catch(error => {
-        setOTPSend(false);
-        setIsLoading(false);
-      })
-    }
+    // if (otpSend) {
+    //   axios.post(URL + '/auth/phone/validate-otp/' + validateUrlId,
+    //     { "phone": userData.phone, otp: userData.otp }).then(res => {
+    //       setOTPSend(false)
+    //       setValidateOtp(true);
+    //       setIsLoading(false);
+    //   }).catch(error => {
+    //     setValidateOtp(false);
+    //     setIsLoading(false);
+    //   })
+    // } else if (validateOtp) {
+    //   console.log('Regiter')
+    //   const validInputs = validateForm();
+    //   if (!validInputs) return null;
+    //   dispatch(
+    //     Register(
+    //       ActionTypes.REGISTER,
+    //       "/auth/register",
+    //       userData,
+    //       setErrors,
+    //       setSuccess,
+    //       setIsLoading,
+    //       history
+    //     )
+    //   );
+    // } else {
+    //   axios.post(URL + '/auth/phone/otp', { "phone": userData.phone }).then(res => {
+    //     setUserData(prevState => ({ ...prevState, otp: res.data.otp }))
+    //     setValidateUrlId(res.data.id)
+    //     setOTPSend(true)
+    //     setIsLoading(false)
+    //   }).catch(error => {
+    //     setOTPSend(false);
+    //     setIsLoading(false);
+    //   })
+    // }
     
+    dispatch(
+      Register(
+        ActionTypes.REGISTER,
+        "/auth/register",
+        userData,
+        setErrors,
+        setSuccess,
+        setIsLoading,
+        history
+      )
+    );
     
   };
 

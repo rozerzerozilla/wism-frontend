@@ -76,7 +76,43 @@ const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp,
 
   return (
     <form onSubmit={onSubmit}>
-      {form}
+      {/* {form} */}
+      <label style={{ color: "white" }}>Your Name</label>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Your Name"
+          name="name"
+          onChange={(e) => {
+            setUserData({ ...userData, name: e.target.value });
+          }}
+        />
+      </div>
+      <label style={{ color: "white" }}>Your Phone</label>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Your Name"
+          name="name"
+          onChange={(e) => {
+            setUserData({ ...userData, phone: e.target.value });
+          }}
+        />
+      </div>
+      <label style={{ color: "white" }}>Your Password</label>
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Your Password"
+          name="password"
+          onChange={(e) => {
+            setUserData({ ...userData, password: e.target.value });
+          }}
+        />
+      </div>
       <div className="text-center">
         <button
           type="submit"
@@ -90,7 +126,8 @@ const FormRegister = ({ userData, setUserData, onSubmit, isLoading, validateOtp,
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;{otpSend ? 'Verify' : validateOtp ? 'Register' : "Send OTP"}
+          &nbsp; &nbsp; Register
+          {/* &nbsp;&nbsp;{otpSend ? 'Verify' : validateOtp ? 'Register' : "Send OTP"} */}
         </button>
       </div>
     </form>

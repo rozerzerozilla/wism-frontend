@@ -114,6 +114,7 @@ export const patchData =
         dispatch({ type: type, payload: data });
         setIsLoading(false);
         setSuccess("data updated successfully!");
+        toast.success("data updated successfully!")
       } catch (error) {
         if (error.response) {
           setErrors(error.response.data.error.message);
