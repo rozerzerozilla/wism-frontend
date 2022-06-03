@@ -27,10 +27,10 @@ const DisplayBusiness = ({ details }) => {
             <div className="col-8 my-auto">
               <div className="h-100">
                 <h5 className="mb-1">{details.bname}&nbsp;&nbsp;
-                  {details.status && (
+                  {details.status === 1 && (
                     <span><BsFillCircleFill style={{ color: "green" }} /></span>
                   )}
-                  {!details.status && (
+                  {details.status === 0 && (
                     <span><BsFillCircleFill style={{ color: "orange" }} /></span>
                   )}
                 </h5>

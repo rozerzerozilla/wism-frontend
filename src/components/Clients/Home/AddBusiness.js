@@ -145,7 +145,7 @@ const ClinetAddBusiness = () => {
     formData.append("lat", location.lat);
     formData.append("lng", location.lng);
     formData.append("category", userData.category);
-    formData.append("subcategories", userData.subcategories);
+    formData.append("subcategories", userData.subcategories.join());
     formData.append("open_all_time", allTime);
     formData.append("monday", JSON.stringify(userData.monday));
     formData.append("tuesday", JSON.stringify(userData.tuesday));
