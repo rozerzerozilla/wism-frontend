@@ -2,12 +2,12 @@ import Joi from "joi";
 
 export const Register = Joi.object({
   name: Joi.string().required().trim().min(3).max(55),
-  phone: Joi.string().required().min(10).max(13),
+  phone: Joi.string().required().min(10).max(10),
   password: Joi.string().required().min(6).max(55),
 });
 
 export const Verify = Joi.object({
-  phone: Joi.string().required().min(10).max(13),
+  phone: Joi.string().required().min(10).max(10),
   otp: Joi.string().required().min(6).max(6),
 });
 
@@ -33,7 +33,7 @@ export const AddCustomForm = Joi.object({
 
 export const AddStaffs = Joi.object({
   name: Joi.string().required().min(3).max(55).trim(),
-  phone: Joi.string().required().min(10).max(13).trim(),
+  phone: Joi.string().required().min(10).max(10).trim(),
   email: Joi.string()
     .email({ tlds: { allow: false } })
     .max(100)

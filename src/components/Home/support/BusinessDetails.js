@@ -302,7 +302,7 @@ const BusinessDetails = ({
                                 time: ts.time,
                                 client_id: ts.client,
                               });
-                              setIsSbtDis(!isSbtDis);
+                              setIsSbtDis(prevState => !prevState);
                             }}
                           />
                           {ts.time} &nbsp;&nbsp;

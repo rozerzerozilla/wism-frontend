@@ -22,6 +22,8 @@ const DisplayTokens = ({
                     <th className="text-xxs font-weight-bolder">Client</th>
                     <th className="text-xxs font-weight-bolder">Phone</th>
                     <th className="text-xxs font-weight-bolder">Service</th>
+                    <th className="text-xxs font-weight-bolder">Date</th>
+                    <th className="text-xxs font-weight-bolder">From - To</th>
                     <th className="text-xxs font-weight-bolder">Action</th>
                   </tr>
                 </thead>
@@ -33,6 +35,8 @@ const DisplayTokens = ({
                           <td>{token.name}</td>
                           <td>{token.phone}</td>
                           <td>{token.service}</td>
+                          <td>{token.adate}</td>
+                          <td>{token.start_t} -- {token.end_t}</td>
                           <td>
                             <select
                               className="form-control"

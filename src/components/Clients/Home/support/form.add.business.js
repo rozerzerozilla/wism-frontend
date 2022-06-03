@@ -614,19 +614,6 @@ const FormAddBusiness = ({
         />
       )}
 
-      {success && (
-        <div
-          className="alert alert-success mx-5"
-          role="alert"
-          style={{ color: "white" }}
-        >
-          <h5>
-            You have successfully added/updated your business, please visit
-            Business Tab to see the changes
-          </h5>
-        </div>
-      )}
-
       <div className="text-center">
         <button
           type="submit"

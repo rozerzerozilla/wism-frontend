@@ -12,7 +12,7 @@ const DisplayBusiness = ({ details }) => {
   return (
     <>
       <div className="container-fluid mx-1 my-3 mt-5">
-        <div className="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div className="blur shadow-blur mx-4 mt-n6 overflow-hidden">
           <div className="row gx-4">
             <div className="col-2">
               <div className="avatar avatar-xl position-relative">
@@ -69,7 +69,7 @@ const DisplayBusiness = ({ details }) => {
       <div className="container-fluid py-4">
         <div className="row">
           <div className="col-12 col-xl-6">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-header pb-0 p-3">
                 <h6 className="mb-0">Address</h6>
               </div>
@@ -112,7 +112,7 @@ const DisplayBusiness = ({ details }) => {
             </div>
           </div>
           <div className="col-12 col-xl-6">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-header pb-0 p-3">
                 <h6 className="mb-0">Timing</h6>
               </div>
@@ -152,7 +152,7 @@ const DisplayBusiness = ({ details }) => {
           </div>
 
           <div className="col-12 col-xl-6 mt-3">
-            <div className="card h-100">
+            <div className="h-100">
               <div className="card-header pb-0 p-3">
                 <h6 className="mb-0">Holidays</h6>
               </div>

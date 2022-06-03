@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ClientsFooter from "./layout/clients.footer";
 import ClientsHeader from "./layout/clients.header";
@@ -8,6 +9,7 @@ import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/client.joi";
 import * as Actions from "../../../redux/actions/client.actions";
 const EditBusiness = () => {
+  const history = useHistory();
   const storedData = JSON.parse(localStorage.getItem("userData"));
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -236,6 +238,12 @@ const EditBusiness = () => {
     } catch (e) {}
   };
 
+  useEffect(() => {
+    if (success) {
+      history.push('/clients/business')
+    }
+  },[success])
+
   //get user roles
   useEffect(() => {
     dispatch(
@@ -353,15 +361,6 @@ const EditBusiness = () => {
                   </div>
                 )}
 
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    <h5>Successfully updated the business</h5>
-                  </div>
-                )}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddBusiness
                     categories={categories}
