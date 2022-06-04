@@ -15,7 +15,9 @@ export const Register =
         // }
         localStorage.setItem("userData", JSON.stringify(data));
         history.replace(`/clients/dashboard`);
+        setErrors(null)
       } catch (error) {
+        setSuccess(null)
         if (error.response) {
           setErrors(error.response.data.error.message);
         } else if (error.request) {
@@ -35,9 +37,11 @@ export const Verify =
         dispatch({ type: type, payload: data });
         setIsLoading(false);
         setSuccess("data created successfully!");
+        setErrors(null)
         localStorage.setItem("userData", JSON.stringify(data));
         history.replace(`/clients/dashboard`);
       } catch (error) {
+        setSuccess(null)
         if (error.response) {
           setErrors(error.response.data.error.message);
         } else if (error.request) {
@@ -73,7 +77,9 @@ export const Login =
         }
         localStorage.setItem("userData", JSON.stringify(data));
         history.replace(`/clients/dashboard`);
+        setErrors(null)
       } catch (error) {
+        setSuccess(null)
         if (error.response) {
           setErrors(error.response.data.error.message);
         } else if (error.request) {
@@ -96,7 +102,9 @@ export const postData =
         setIsLoading(false);
         toast.success("Data saved successfully!")
         setSuccess("data created successfully!");
+        setErrors(null)
       } catch (error) {
+        setSuccess(null)
         if (error.response) {
           error?.response?.data?.error?.message ? toast.error(error.response.data.error.message) : toast.error('unable to update')
           error?.response?.data?.error?.message ? setErrors(error.response.data.error.message) : setErrors(null)
@@ -121,7 +129,9 @@ export const putData =
         setIsLoading(false);
         toast.success("Data updated successfully!")
         setSuccess("data updated successfully!");
+        setErrors(null)
       } catch (error) {
+        setSuccess(null)
         if (error.response) {
           toast.error(error.response?.data?.error?.message);
           setErrors(error.response?.data?.error?.message);
@@ -142,9 +152,11 @@ export const deleteData =
       const { data } = await APIs.deleteData(url);
       dispatch({ type: type, payload: data });
       setIsLoading(false);
-      toast.success("Deleted successfully!" + data.message)
+      // toast.success("Deleted successfully!" + data.message)
       setSuccess("Deleted successfully!");
+      setErrors(null)
     } catch (error) {
+      setSuccess(null)
       if (error.response) {
         toast.error(error.response?.data?.error?.message)
         setErrors(error.response?.data?.error?.message);

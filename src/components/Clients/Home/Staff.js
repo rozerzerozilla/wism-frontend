@@ -10,6 +10,7 @@ import * as Actions from "../../../redux/actions/client.actions";
 import DisplayStaff from "./support/display.staff";
 import UnauthorizedModal from "../../Admin/Home/UnauthorizedModal";
 import Modal from "react-responsive-modal";
+import { toast } from "react-toastify";
 const ClientStaff = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [staffId, setStaffId] = useState('');
@@ -29,7 +30,13 @@ const ClientStaff = () => {
         setIsLoading
       )
     );
-  }, [dispatch]);
+    return () => {
+      dispatch({
+        type: ActionTypes.GET_CLIENT_STAFFS,
+        payload: [],
+      })
+    }
+  }, [dispatch, window.location]);
 
   //disable or enable staffs
   const toggleStaff = (checked, id) => {
@@ -53,6 +60,16 @@ const ClientStaff = () => {
     );
   };
 
+  useEffect(() => {
+    if(errors !== null && errors !== ""){
+      toast.error(errors)
+    }
+
+    if (success !== null && success !== "") {
+      toast.success(success)
+    }
+  },[errors, success])
+
   const submitDelete = () => {
     dispatch(
       Actions.deleteData(
@@ -64,14 +81,14 @@ const ClientStaff = () => {
       )
     );
     setOpenDeleteModal(false)
-    dispatch(
+    setTimeout(()=>{dispatch(
       Actions.getData(
         ActionTypes.GET_CLIENT_STAFFS,
         "/home/staff",
         setErrors,
         setIsLoading
       )
-    );
+    );}, 500)
   }
 
   return (
@@ -96,13 +113,6 @@ const ClientStaff = () => {
                   </div>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
-                  {errors && (errors !== "Unauthorized access!" && errors !== "Unauthorized") && (
-                    <div className="d-flex  text-center w-100">
-                      <p className="mx-auto text-danger text-center text-capitalize text-secondary text-md font-weight-bolder opacity-10">
-                        {errors}
-                      </p>
-                    </div>
-                  )}
 
                   {errors && (errors === "Unauthorized access!" || errors === "Unauthorized") &&
                     <UnauthorizedModal />

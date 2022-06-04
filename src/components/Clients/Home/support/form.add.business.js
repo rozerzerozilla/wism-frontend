@@ -3,6 +3,7 @@ import MapPicker from "react-google-map-picker";
 import style from "../../clients.module.css";
 import FormAddTimings from "./form.add.timings";
 import FormEditTimings from "./form.edit.timings";
+import {toast} from "react-toastify"
 const FormAddBusiness = ({
   categories,
   getSubcategories,
@@ -174,7 +175,13 @@ const FormAddBusiness = ({
               className="form-control"
               accept="image/*"
               onChange={(e) => {
-                setuserData({ ...userData, photo: e.target.files[0] });
+                if (e.target.files[0].size > 1048576) {
+                  toast.error("Image should be less than 1MB")
+                  e.target.value = "";
+                } else {
+                  setuserData({ ...userData, photo: e.target.files[0] });
+                }
+                
               }}
             />
           </div>
@@ -201,7 +208,12 @@ const FormAddBusiness = ({
               placeholder="Select Image"
               accept="image/*"
               onChange={(e) => {
-                setuserData({ ...userData, ad1: e.target.files[0] });
+                if (e.target.files[0].size > 1048576) {
+                  toast.error("Image should be less than 1MB")
+                  e.target.value = "";
+                } else {
+                  setuserData({ ...userData, ad1: e.target.files[0] });
+                }
               }}
             />
           </div>
@@ -222,7 +234,12 @@ const FormAddBusiness = ({
               className="form-control"
               accept="image/*"
               onChange={(e) => {
-                setuserData({ ...userData, ad2: e.target.files[0] });
+                if (e.target.files[0].size > 1048576) {
+                  toast.error("Image should be less than 1MB")
+                  e.target.value = "";
+                } else {
+                  setuserData({ ...userData, ad2: e.target.files[0] });
+                }
               }}
             />
           </div>

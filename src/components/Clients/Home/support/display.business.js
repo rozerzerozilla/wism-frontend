@@ -12,7 +12,7 @@ const DisplayBusiness = ({ details }) => {
   return (
     <>
       <div className="container-fluid mx-1 my-3 mt-5">
-        <div className="blur shadow-blur mx-4 mt-n6 overflow-hidden">
+        <div className=" mx-4 mt-n6 overflow-hidden">
           <div className="row gx-4">
             <div className="col-2">
               <div className="avatar avatar-xl position-relative">

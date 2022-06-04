@@ -7,8 +7,10 @@ import FormAddBusiness from "./support/form.add.business";
 import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/client.joi";
 import * as Actions from "../../../redux/actions/client.actions";
+import { useHistory } from "react-router-dom";
 
 const ClinetAddBusiness = () => {
+  const history = useHistory();
   const storedData = JSON.parse(localStorage.getItem("userData"));
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -174,9 +176,15 @@ const ClinetAddBusiness = () => {
         setIsLoading
       )
     );
-    setuserData({});
+    // setuserData({});
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    if (success !== null && success) {
+      history.push("/admin/business");
+    }
+  },[success])
 
   //validate form
   const validateForm = () => {
@@ -266,28 +274,7 @@ const ClinetAddBusiness = () => {
                     <div className="col-3"></div>
                   </div>
                 </div>
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    <h5 style={{ color: "white" }}>
-                      Your Business Added successfully, please visit Business
-                      Tab to check the details
-                    </h5>
-                  </div>
-                )}
+                
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddBusiness
                     categories={categories}

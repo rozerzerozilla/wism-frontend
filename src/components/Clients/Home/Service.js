@@ -43,7 +43,13 @@ const ClientService = () => {
         setIsLoading
       )
     );
-  }, [dispatch]);
+    return () => {
+      dispatch({
+        type: ActionTypes.GET_CLIENT_SERVICE,
+        payload:[],
+      })
+    }
+  }, [dispatch, window.location]);
 
   // Delete service functions
 

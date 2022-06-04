@@ -155,7 +155,7 @@ const FormEditStaff = ({
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;Add Staff
+          &nbsp;&nbsp;Edit Staff
         </button>
       </div>
     </form>
