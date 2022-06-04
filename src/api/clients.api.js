@@ -32,6 +32,10 @@ export class ClientApi {
     return axios.put(URL + url, postdata);
   };
 
+  patchData = (postdata, url) => {
+    return axios.patch(URL + url, postdata);
+  };
+
   deleteData = (url) => {
     return axios.delete(URL + url);
   };

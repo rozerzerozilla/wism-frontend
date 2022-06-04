@@ -146,13 +146,36 @@ export const putData =
       }
     };
 
+export const patchData =
+  (type, url, postData, setErrors, setSuccess, setIsLoading) =>
+    async (dispatch) => {
+      console.log(type, url, postData, setErrors, setSuccess, setIsLoading, dispatch)
+      try {
+        const { data } = await APIs.patchData(postData, url);
+        dispatch({ type: type, payload: data });
+        setIsLoading(false);
+        setSuccess("data updated successfully!");
+        toast.success("data updated successfully!");
+        setErrors(null)
+      } catch (error) {
+        setSuccess(null)
+        if (error.response) {
+          setErrors(error.response.data.error.message);
+        } else if (error.request) {
+          setErrors("Something went wrong, please try again later!");
+        } else {
+          setErrors(error.message);
+        }
+        setIsLoading(false);
+      }
+    };
 export const deleteData =
   (type, url, setErrors, setSuccess, setIsLoading) => async (dispatch) => {
     try {
       const { data } = await APIs.deleteData(url);
       dispatch({ type: type, payload: data });
       setIsLoading(false);
-      // toast.success("Deleted successfully!" + data.message)
+      toast.success("Deleted successfully!")
       setSuccess("Deleted successfully!");
       setErrors(null)
     } catch (error) {

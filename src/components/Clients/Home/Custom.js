@@ -66,7 +66,19 @@ const ClientCustomForm = () => {
         setIsLoading
       )
     );
-  }, [dispatch]);
+    return () => {
+      dispatch({
+        type: ActionTypes.GET_CLIENT_CUSTOM_FORM,
+        payload:[]
+      })
+    }
+  }, [dispatch, window.location]);
+
+  useEffect(() => {
+    if(success) {
+      setOpenModal(false)
+    }
+  },[success])
 
   const removeField = (id) => {
     dispatch(

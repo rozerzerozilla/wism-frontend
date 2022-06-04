@@ -106,8 +106,8 @@ const ClientService = () => {
     // else save
     else {
       dispatch(
-        Actions.putData(
-          ActionTypes.UPDATE_SERVICE,
+        Actions.patchData(
+          ActionTypes.UPDATE_CLIENT_SERVICE,
           `/home/services/${service.id}`,
           service,
           setErrors,

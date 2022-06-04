@@ -20665,7 +20665,7 @@ hr.horizontal.gray-light {
 }
 
 .z-index-sticky {
-  z-index: 1020;
+  z-index: 99;
 }
 
 .z-index-nav-sticky {
