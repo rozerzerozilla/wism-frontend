@@ -85,6 +85,7 @@ const AdminEditBusiness = () => {
   const [defaultLocation, setDefaultLocation] = useState(Loc);
   const [location, setLocation] = useState(Loc);
   const [zoom, setZoom] = useState(DefaultZoom);
+  const [postal_localities, setPostalLocalities] = useState([]);
 
   const dispatch = useDispatch();
   var categories = [];
@@ -102,6 +103,35 @@ const AdminEditBusiness = () => {
   latlng = useSelector((state) => {
     return state.clients.latlng;
   });
+
+  useEffect(() => {
+    console.log(latlng);
+    setDefaultLocation({
+      lat: latlng.lat,
+      lng: latlng.lng,
+    });
+    setLocation({ lat: latlng?.lat, lng: latlng?.lng });
+    var postalData = latlng?.address_components;
+    postalData?.map((ele, idx) => {
+      if (ele.types[0] === 'administrative_area_level_1') {
+        setuserData(prevState => ({
+          ...prevState,
+          state: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'administrative_area_level_2') {
+        setuserData(prevState => ({
+          ...prevState,
+          city: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'locality') {
+        setuserData(prevState => ({
+          ...prevState,
+          street: ele.long_name,
+        }))
+      }
+    })
+    setPostalLocalities(latlng.postal_localities)
+  }, [latlng])
 
   function handleChangeLocation(lat, lng) {
     setLocation({ lat: lat, lng: lng });
@@ -210,36 +240,26 @@ const AdminEditBusiness = () => {
     return results.value;
   };
 
-  const getLatLng = async () => {
+  const getLatLng = async (zipcode) => {
     try {
-      // if (userData.postalcode.length === 6) {
-      const add =
-        userData.address1 +
-        "," +
-        userData.address2 +
-        "," +
-        userData.street +
-        "," +
-        userData.city +
-        "," +
-        userData.state;
-      dispatch(
-        Actions.getData(
-          ActionTypes.GET_LATLNG,
-          `/home/getlatlng?address=${add}`,
-          setErrors,
-          setIsLoading
-        )
-      );
-      if (latlng.lat && latlng.lng) {
-        setDefaultLocation({
-          lat: latlng.lat,
-          lng: latlng.lng,
-        });
-        setLocation({ lat: latlng.lat, lng: latlng.lng });
+      if (zipcode.length === 6) {
+        dispatch(
+          Actions.getData(
+            ActionTypes.GET_LATLNG,
+            `/home/getlatlng?address=${zipcode}`,
+            setErrors,
+            setIsLoading
+          )
+        );
+        if (latlng.lat && latlng.lng) {
+          setDefaultLocation({
+            lat: latlng.lat,
+            lng: latlng.lng,
+          });
+          setLocation({ lat: latlng.lat, lng: latlng.lng });
+        }
       }
-      // }
-    } catch (e) {}
+    } catch (e) { }
   };
 
   //get user roles
@@ -278,7 +298,12 @@ const AdminEditBusiness = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (business?.postalcode !== null && business?.postalcode !== "") {
+      getLatLng(business.postalcode)
+    }
+
     const datas = { ...userData }
+    
     if (business?.timings) {
       
       datas.monday.monday_work_from = business?.timings[0]?.work_from || "";
@@ -371,6 +396,7 @@ const AdminEditBusiness = () => {
                     getLatLng={getLatLng}
                     success={success}
                     business={business}
+                    postalLocalities={postal_localities}
                   />
                 </div>
               </div>

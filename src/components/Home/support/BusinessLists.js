@@ -22,7 +22,7 @@ const BusinessLists = ({ businesses, title, isLoading, errors }) => {
           ></span>
         )}
         <div className="row">
-          {businesses &&
+          {businesses?.length <= 0 ? <div>No services found near by area with the selected range</div> :
             businesses.map((business) => (
               <div
                 className="col-xs-6 col-sm-6 col-md-3 col-lg-3"

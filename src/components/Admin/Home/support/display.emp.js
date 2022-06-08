@@ -58,9 +58,11 @@ const DisplayEmployees = ({ staff }) => {
       InvalidEmployeeError("employee phone");
       setIsLoading(false);
     }
-    else if (!validator.isEmail(userData.email) || userData.email === "") {
-      InvalidEmployeeError("employee email");
-      setIsLoading(false);
+    else if (userData.email.length > 0) {
+      if (!validator.isEmail(userData.email) || userData.email === "") {
+        InvalidEmployeeError("employee email");
+        setIsLoading(false);
+      }
     }
     else if (userData.name.includes(" ") || userData.name.includes("")) {
       setEdit(false);

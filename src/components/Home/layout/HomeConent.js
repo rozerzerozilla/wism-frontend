@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import LeftBar from "./LeftBar";
 import RightBar from "./RightBar";
 import DisplayBusinesses from "../support/Business";
+import { toast } from "react-toastify";
+import React from "react";
 
 const HomeContent = ({
   isLoading,
@@ -15,7 +17,14 @@ const HomeContent = ({
   homeSubCategories,
   subCat,
   location,
+  dist,
 }) => {
+  React.useEffect(() => {
+    if (errors !== null && errors !== ""){
+      toast.error(errors)
+    }
+  }, [errors])
+  console.log(dist)
   return (
     <section className="featured mt-4">
       <div className="container">
@@ -30,15 +39,7 @@ const HomeContent = ({
             />
           </div>
           <div className="col-sm-12 col-md-8">
-            {errors && (
-              <div
-                className="alert alert-danger mx-5"
-                role="alert"
-                style={{ color: "white" }}
-              >
-                {errors}
-              </div>
-            )}
+            
             {isLoading && (
               <div className="d-flex justify-content-center">
                 <div className="spinner-border text-danger" role="status">
@@ -47,7 +48,7 @@ const HomeContent = ({
               </div>
             )}
             <div className="row mx-3">
-              {businesses &&
+              {businesses?.length <= 0 ? <h5>No services found near by area with the {dist}KM selected range</h5> :
                 businesses.map((business) => {
                   return (
                     <DisplayBusinesses key={business.id} business={business} />

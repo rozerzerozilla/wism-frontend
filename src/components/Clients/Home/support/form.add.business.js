@@ -24,6 +24,7 @@ const FormAddBusiness = ({
   getLatLng,
   success,
   business,
+  postalLocalities,
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
   const [showTiming, setShowTiming] = useState(false);
@@ -302,8 +303,23 @@ const FormAddBusiness = ({
           </div>
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Street</label>
+              <label className={style.label}>Postal Code *</label>
               <input
+                type="text"
+                className="form-control"
+                placeholder="Postal Code"
+                name="postalcode"
+                value={userData.postalcode || business.postalcode || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, postalcode: e.target.value });
+                  getLatLng(e.target.value);
+                }}
+                required
+              />
+            </div>
+            <div className="col-6">
+              <label className={style.label}>Choose Postal Localities *</label>
+              {/* <input
                 type="text"
                 className="form-control"
                 placeholder="Street"
@@ -312,7 +328,20 @@ const FormAddBusiness = ({
                 onChange={(e) => {
                   setuserData({ ...userData, street: e.target.value });
                 }}
-              />
+              /> */}
+              <select
+                required
+                className="form-control"
+                value={userData.street || business.street || ""}
+                name="street"
+                disabled={postalLocalities?.length <= 0}
+                onChange={(e) => {
+                  setuserData({ ...userData, street: e.target.value });
+                }}
+              >
+                <option value="">Choose localities</option>
+                {postalLocalities?.map((ele, idx) => <option value={ele} key={idx}>{ele}</option>)}
+              </select>
             </div>
             <div className="col-6">
               <label className={style.label}>City</label>
@@ -322,6 +351,7 @@ const FormAddBusiness = ({
                 placeholder="City"
                 name="city"
                 value={userData.city || business.city || ""}
+                disabled
                 onChange={(e) => {
                   setuserData({ ...userData, city: e.target.value });
                 }}
@@ -332,206 +362,16 @@ const FormAddBusiness = ({
           <div className="row">
             <div className="col-6">
               <label className={style.label}>State</label>
-              <select
-                className="form-control"
-                name="state"
-                onChange={(e) => {
-                  setuserData({ ...userData, state: e.target.value });
-                  getLatLng();
-                }}
-              >
-                <option value="">Choose State</option>
-                <option
-                  value="Andhra Pradesh"
-                  selected={business.state === "Andhra Pradesh"}
-                >
-                  Andhra Pradesh
-                </option>
-                <option
-                  value="Andaman and Nicobar Islands"
-                  selected={business.state === "Andaman and Nicobar Islands"}
-                >
-                  Andaman and Nicobar Islands
-                </option>
-                <option
-                  value="Arunachal Pradesh"
-                  selected={business.state === "Arunachal Pradesh"}
-                >
-                  Arunachal Pradesh
-                </option>
-                <option value="Assam" selected={business.state === "Assam"}>
-                  Assam
-                </option>
-                <option value="Bihar" selected={business.state === "Bihar"}>
-                  Bihar
-                </option>
-                <option
-                  value="Chandigarh"
-                  selected={business.state === "Chandigarh"}
-                >
-                  Chandigarh
-                </option>
-                <option
-                  value="Chhattisgarh"
-                  selected={business.state === "Andhra Pradesh"}
-                >
-                  Chhattisgarh
-                </option>
-                <option
-                  value="Dadar and Nagar Haveli"
-                  selected={business.state === "Andaman and Nicobar Islands"}
-                >
-                  Dadar and Nagar Haveli
-                </option>
-                <option
-                  value="Daman and Diu"
-                  selected={business.state === "Dadar and Nagar Haveli"}
-                >
-                  Daman and Diu
-                </option>
-                <option value="Delhi" selected={business.state === "Delhi"}>
-                  Delhi
-                </option>
-                <option
-                  value="Lakshadweep"
-                  selected={business.state === "Lakshadweep"}
-                >
-                  Lakshadweep
-                </option>
-                <option
-                  value="Puducherry"
-                  selected={business.state === "Puducherry"}
-                >
-                  Puducherry
-                </option>
-                <option value="Goa" selected={business.state === "Goa"}>
-                  Goa
-                </option>
-                <option value="Gujarat" selected={business.state === "Gujarat"}>
-                  Gujarat
-                </option>
-                <option value="Haryana" selected={business.state === "Haryana"}>
-                  Haryana
-                </option>
-                <option
-                  value="Himachal Pradesh"
-                  selected={business.state === "Himachal Pradesh"}
-                >
-                  Himachal Pradesh
-                </option>
-                <option
-                  value="Jammu and Kashmir"
-                  selected={business.state === "Jammu and Kashmir"}
-                >
-                  Jammu and Kashmir
-                </option>
-                <option
-                  value="Jharkhand"
-                  selected={business.state === "Jharkhand"}
-                >
-                  Jharkhand
-                </option>
-                <option
-                  value="Karnataka"
-                  selected={business.state === "Karnataka"}
-                >
-                  Karnataka
-                </option>
-                <option value="Kerala" selected={business.state === "Kerala"}>
-                  Kerala
-                </option>
-                <option
-                  value="Madhya Pradesh"
-                  selected={business.state === "Madhya Pradesh"}
-                >
-                  Madhya Pradesh
-                </option>
-                <option
-                  value="Maharashtra"
-                  selected={business.state === "Maharashtra"}
-                >
-                  Maharashtra
-                </option>
-                <option value="Manipur" selected={business.state === "Manipur"}>
-                  Manipur
-                </option>
-                <option
-                  value="Meghalaya"
-                  selected={business.state === "Meghalaya"}
-                >
-                  Meghalaya
-                </option>
-                <option value="Mizoram" selected={business.state === "Mizoram"}>
-                  Mizoram
-                </option>
-                <option
-                  value="Nagaland"
-                  selected={business.state === "Nagaland"}
-                >
-                  Nagaland
-                </option>
-                <option value="Odisha" selected={business.state === "Odisha"}>
-                  Odisha
-                </option>
-                <option value="Punjab" selected={business.state === "Punjab"}>
-                  Punjab
-                </option>
-                <option
-                  value="Rajasthan"
-                  selected={business.state === "Rajasthan"}
-                >
-                  Rajasthan
-                </option>
-                <option value="Sikkim" selected={business.state === "Sikkim"}>
-                  Sikkim
-                </option>
-                <option
-                  value="Tamil Nadu"
-                  selected={business.state === "Tamil Nadu"}
-                >
-                  Tamil Nadu
-                </option>
-                <option
-                  value="Telangana"
-                  selected={business.state === "Telangana"}
-                >
-                  Telangana
-                </option>
-                <option value="Tripura" selected={business.state === "Tripura"}>
-                  Tripura
-                </option>
-                <option
-                  value="Uttar Pradesh"
-                  selected={business.state === "Uttar Pradesh"}
-                >
-                  Uttar Pradesh
-                </option>
-                <option
-                  value="Uttarakhand"
-                  selected={business.state === "Uttarakhand"}
-                >
-                  Uttarakhand
-                </option>
-                <option
-                  value="West Bengal"
-                  selected={business.state === "West Bengal"}
-                >
-                  West Bengal
-                </option>
-              </select>
-            </div>
-            <div className="col-6">
-              <label className={style.label}>Postal Code</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Postal Code"
-                name="postalcode"
-                value={userData.postalcode || business.postalcode || ""}
+                placeholder="State"
+                name="state"
+                value={userData.state || ""}
+                disabled
                 onChange={(e) => {
-                  setuserData({ ...userData, postalcode: e.target.value });
+                  setuserData({ ...userData, state: e.target.value });
                 }}
-                onBlur={getLatLng}
                 required
               />
             </div>

@@ -10,6 +10,7 @@ import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
+import axios from "axios";
 //const format = "DD-MM-YYYY";
 const AdminAddBusiness = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -83,12 +84,14 @@ const AdminAddBusiness = () => {
     holidays_working: { holiday_work_from: "", holiday_work_to: "" },
   });
   const Loc = { lat: 10, lng: 106 };
-  const DefaultZoom = 10;
+  const DefaultZoom = 12;
   const [defaultLocation, setDefaultLocation] = useState(Loc);
   const [location, setLocation] = useState(Loc);
   const [zoom, setZoom] = useState(DefaultZoom);
+  const [postal_localities, setPostalLocalities] = useState([]);
 
   function handleChangeLocation(lat, lng) {
+    // console.log(rest)
     setLocation({ lat: lat, lng: lng });
   }
 
@@ -109,6 +112,36 @@ const AdminAddBusiness = () => {
   latlng = useSelector((state) => {
     return state.clients.latlng;
   });
+
+  useEffect(() => {
+    console.log(latlng);
+    setDefaultLocation({
+      lat: latlng.lat,
+      lng: latlng.lng,
+    });
+    setLocation({ lat: latlng?.lat, lng: latlng?.lng });
+    var postalData = latlng?.address_components;
+    postalData?.map((ele, idx) => {
+      if (ele.types[0] === 'administrative_area_level_1') {
+        setuserData(prevState => ({
+          ...prevState,
+          state: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'administrative_area_level_2') {
+        setuserData(prevState => ({
+          ...prevState,
+          city: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'locality') {
+        setuserData(prevState => ({
+          ...prevState,
+          street: ele.long_name,
+        }))
+      }
+    })
+    setPostalLocalities(latlng.postal_localities)
+  }, [latlng])
+
   const getSubcategories = (id) => {
     dispatch(
       Actions.getPData(
@@ -208,6 +241,7 @@ const AdminAddBusiness = () => {
     try {
       navigator.geolocation.getCurrentPosition(function (position) {
         if (position) {
+          console.log(position)
           setDefaultLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
@@ -218,38 +252,30 @@ const AdminAddBusiness = () => {
           });
         }
       });
-    } catch (e) {}
+    } catch (e) { }
+    getStates();
+    getCities();
   }, [dispatch]);
 
-  const getLatLng = async () => {
+  const getLatLng = async (zipcode) => {
     try {
-      // if (userData.postalcode.length === 6) {
-      const add =
-        userData.address1 +
-        "," +
-        userData.address2 +
-        "," +
-        userData.street +
-        "," +
-        userData.city +
-        "," +
-        userData.state;
-      dispatch(
-        Actions.getData(
-          ActionTypes.GET_LATLNG,
-          `/home/getlatlng?address=${add}`,
-          setErrors,
-          setIsLoading
-        )
-      );
-      if (latlng.lat && latlng.lng) {
-        setDefaultLocation({
-          lat: latlng.lat,
-          lng: latlng.lng,
-        });
-        setLocation({ lat: latlng.lat, lng: latlng.lng });
+      if (zipcode.length === 6) {
+        dispatch(
+          Actions.getData(
+            ActionTypes.GET_LATLNG,
+            `/home/getlatlng?address=${zipcode}`,
+            setErrors,
+            setIsLoading
+          )
+        );
+        if (latlng.lat && latlng.lng) {
+          setDefaultLocation({
+            lat: latlng.lat,
+            lng: latlng.lng,
+          });
+          setLocation({ lat: latlng.lat, lng: latlng.lng });
+        }
       }
-      // }
     } catch (e) {}
   };
 
@@ -262,6 +288,17 @@ const AdminAddBusiness = () => {
     });
     
   },[holidays])
+
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  async function getStates() {
+    const response = await axios.post("https://countriesnow.space/api/v0.1/countries/states", { "country": "India" });
+    setStates(response.data.data.states);
+  }
+  async function getCities() {
+    const response = await axios.post("https://countriesnow.space/api/v0.1/countries/cities", { "country": "India" });
+    setCities(response.data.data);
+  }
 
   return (
     <>
@@ -304,6 +341,9 @@ const AdminAddBusiness = () => {
                     getLatLng={getLatLng}
                     success={success}
                     errors={errors}
+                    states={states}
+                    cities={cities}
+                    postalLocalities={postal_localities}
                   />
                 </div>
               </div>

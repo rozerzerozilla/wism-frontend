@@ -141,6 +141,8 @@ const HomeHeader = ({
                                     <option value="10">10KM</option>
                                     <option value="25">25KM</option>
                                     <option value="50">50KM</option>
+                                    <option value="100">100KM</option>
+                                    <option value="200">200KM</option>
                                   </select>
                                 </div>
                               </div>

@@ -130,6 +130,7 @@ const HomeBusiness = () => {
     if (!service_id) {
       return;
     }
+    console.log('getTimeSlot  ',`/gettimeslot?id=${service_id}&lat=${location.lat}&lng=${location.lng}&mode=${tokenForm.mode}`)
     dispatch(
       Actions.getData(
         ActionTypes.PUBLIC_GET_TIMESLOTS,

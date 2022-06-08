@@ -16,7 +16,7 @@ const Search = () => {
   const [subcategoryID, setSubCategoryID] = useState("");
   const [categoryID, setCategoryID] = useState("");
   const [city, setCity] = useState(false);
-  const [dist, setDist] = useState("");
+  const [dist, setDist] = useState("5");
   const [errors, setErrors] = useState(false);
   const [listView, setListView] = useState(true);
   const [inputBusiness, setInputBusiness] = useState("");
@@ -171,6 +171,7 @@ const Search = () => {
           leftadlink={adImage}
           rightadlink={adImage}
           location={location}
+          dist={dist}
         />
       )}
       {!listView && (
