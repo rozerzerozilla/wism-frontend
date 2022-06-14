@@ -1,6 +1,7 @@
 import { MdBorderColor, MdDelete } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-const DisplayStaff = ({ staff }) => {
+const DisplayStaff = ({ staff, id, handleStaffDelete }) => {
   return (
     <tr>
       <td>
@@ -35,8 +36,10 @@ const DisplayStaff = ({ staff }) => {
       </td>
       <td>
         <div className="text-center text-xs font-weight-bold mb-0">
-          <MdBorderColor size={20} color="teal" style={{cursor:"pointer"}}/>
-          &nbsp;&nbsp;<MdDelete size={20} color="red" style={{cursor:"pointer"}}/>
+          <Link to={`/admin/business/emp/${id}/${staff.id}`}><MdBorderColor size={20} color="teal" style={{cursor:"pointer"}}/></Link>
+          &nbsp;&nbsp;{staff.role === 2 && <MdDelete size={20} color="red" style={{cursor:"pointer"}} 
+          onClick={(e)=>handleStaffDelete({name: staff.name, id:staff.id})}
+          />}
         </div>
       </td>
     </tr>

@@ -317,6 +317,9 @@ const ClinetAddBusiness = () => {
                     success={success}
                     business={[]}
                     postalLocalities={postal_localities}
+                    handleBackRoute={()=>{
+                      history.goBack()
+                    }}
                   />
                 </div>
               </div>

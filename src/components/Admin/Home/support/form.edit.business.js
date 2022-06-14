@@ -22,6 +22,7 @@ const FormEditBusiness = ({
   getLatLng,
   business,
   postalLocalities,
+  handleBackRoute
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
   const [showTiming, setShowTiming] = useState(false);
@@ -446,7 +447,7 @@ const FormEditBusiness = ({
       <div className="text-center">
         <button
           type="submit"
-          className="btn bg-gradient-info w-50 mt-4 mb-0"
+          className="btn bg-gradient-info w-25 mt-4 mb-0"
           disabled={isLoading}
         >
           {isLoading && (
@@ -457,6 +458,12 @@ const FormEditBusiness = ({
             ></span>
           )}
           &nbsp;&nbsp;Update My Business
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary w-25 mt-4 mb-0 mx-auto"
+          onClick={handleBackRoute}
+        >Cancel
         </button>
       </div>
     </form>

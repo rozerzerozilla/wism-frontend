@@ -7,6 +7,7 @@ const initialState = {
   businesses: [],
   roles: [],
   staffs: [],
+  staff:[],
   profile: [],
 };
 
@@ -17,6 +18,9 @@ const AdminReducer = (state = initialState, action) => {
 
     case ActionTypes.GET_ADMIN_STAFFS:
       return { ...state, staffs: action.payload };
+
+      case ActionTypes.GET_ADMIN_STAFF:
+      return { ...state, staff: action.payload };
 
     case ActionTypes.POST_ADMIN_STAFFS:
       return { ...state, staffs: [...state.staffs, action.payload] };

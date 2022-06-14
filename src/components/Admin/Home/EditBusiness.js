@@ -8,8 +8,9 @@ import FormEditBusiness from "./support/form.edit.business";
 import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 const AdminEditBusiness = () => {
+  const history = useHistory();
   const { id } = useParams();
   const storedData = JSON.parse(localStorage.getItem("userData"));
   const [isLoading, setIsLoading] = useState(false);
@@ -397,6 +398,9 @@ const AdminEditBusiness = () => {
                     success={success}
                     business={business}
                     postalLocalities={postal_localities}
+                    handleBackRoute={()=>{
+                      history.goBack()
+                    }}
                   />
                 </div>
               </div>

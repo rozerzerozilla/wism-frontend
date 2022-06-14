@@ -5,10 +5,14 @@ import DisplayStaff from "./display.staff";
 import { BsFillCircleFill } from "react-icons/bs";
 import React from "react";
 import EditServices from "./form.edit.services";
+import DeleteServices from "./form.delete.services";
+import DeleteStaff from "./form.delete.staff";
 
 const DisplayBusiness = ({ details, id }) => {
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [openDeleteModal, setOpenDeleteModal] = React.useState(false);
+  const [openDeleteStaffModal, setOpenDeleteStaffModal] = React.useState(false);
+  const [staffId, setStaffID] = React.useState("");
   const [serviceId, setServiceID] = React.useState("");
   const [service, setServices] = React.useState(null);
   // console.log(details)
@@ -22,6 +26,8 @@ const DisplayBusiness = ({ details, id }) => {
     setOpenDeleteModal(true);
     setServiceID(id);
   }
+
+  const [data, setData] = React.useState({})
   return (
     <>
       <div className="container-fluid mx-1 my-3 mt-5">
@@ -292,7 +298,14 @@ const DisplayBusiness = ({ details, id }) => {
                   <tbody>
                     {details.users &&
                       details.users.map((staff) => (
-                        <DisplayStaff staff={staff} key={staff.id} />
+                        <DisplayStaff 
+                          staff={staff} key={staff.id}  id={id}
+                          handleStaffDelete={(data)=>{
+                            setOpenDeleteStaffModal(true)
+                            setStaffID(data.id)
+                            setData(data)
+                          }}
+                        />
                       ))}
                   </tbody>
                 </table>
@@ -306,6 +319,20 @@ const DisplayBusiness = ({ details, id }) => {
         services={service}
         openModal={openEditModal}
         handleClose={() => setOpenEditModal(false)}
+      />
+      <DeleteServices
+        openModal={openDeleteModal}
+        handleClose={()=>setOpenDeleteModal(false)}
+        serviceId={serviceId}
+        id={id}
+        data={{name:""}}
+      />
+      <DeleteStaff
+        openModal={openDeleteStaffModal}
+        handleClose={()=>setOpenDeleteStaffModal(false)}
+        staffId={staffId}
+        id={id}
+        data={data}
       />
     </>
   );

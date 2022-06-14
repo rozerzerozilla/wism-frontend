@@ -8,6 +8,7 @@ import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/admin.actions";
 import FormAddStaff from "./support/form.add.staff";
 import { AddBStaffs } from "../../../helpers/admin.joi";
+import { toast } from "react-toastify";
 const AddBusinessStaff = () => {
   const { id } = useParams();
   const history = useHistory();
@@ -53,16 +54,16 @@ const AddBusinessStaff = () => {
       )
     );
     // setUserData({});
-    history.push(`/admin/business/${id}`);
+    
   };
 
   const validateForm = () => {
     const results = AddBStaffs.validate(userData);
     if (results.error) {
-      setErrors(results.error.details[0].message);
+      toast.error(results.error.details[0].message);
       return false;
     }
-    setErrors("");
+    setErrors(null);
     return results.value;
   };
   useEffect(() => {
@@ -76,6 +77,16 @@ const AddBusinessStaff = () => {
     );
   }, [dispatch]);
 
+  useEffect(()=>{
+    if(errors){
+      toast.error(errors)
+    }
+    if(success){
+      history.push(`/admin/business/${id}`);
+      toast.success(success)
+    }
+  },[errors, success])
+
   return (
     <>
       <AdminNavMenu path="business" />
@@ -85,25 +96,6 @@ const AddBusinessStaff = () => {
           <div className="row">
             <div className="col-12">
               <div className="card mb-4">
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {success}
-                  </div>
-                )}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddStaff
                     onSubmit={onSubmit}

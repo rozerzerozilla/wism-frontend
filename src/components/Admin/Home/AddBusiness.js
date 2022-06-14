@@ -9,10 +9,11 @@ import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
 import { toast } from "react-toastify";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import axios from "axios";
 //const format = "DD-MM-YYYY";
 const AdminAddBusiness = () => {
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -344,6 +345,9 @@ const AdminAddBusiness = () => {
                     states={states}
                     cities={cities}
                     postalLocalities={postal_localities}
+                    handleBackRoute={()=>{
+                      history.goBack()
+                    }}
                   />
                 </div>
               </div>

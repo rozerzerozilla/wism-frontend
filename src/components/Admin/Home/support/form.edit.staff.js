@@ -1,4 +1,5 @@
-import style from "../../clients.module.css";
+import { useEffect } from "react";
+import style from "../../admin.module.css";
 const FormEditStaff = ({
   onSubmit,
   userData,
@@ -7,6 +8,12 @@ const FormEditStaff = ({
   services,
   staff,
 }) => {
+
+  // useEffect(()=>{
+  //   services && services.map((service) => {
+  //               userData.services.map(ele=>ele.service_id === service.id ? console.log(ele):null)
+  //           })
+  // })
   return (
     <form onSubmit={onSubmit} className="mx-4 my-4">
       <div className="mb-3">
@@ -66,6 +73,7 @@ const FormEditStaff = ({
             <label className={style.label}>Role</label>
             <select
               className="form-control"
+              value={userData.role}
               name="categoryID"
               onChange={(e) => {
                 setUserData({ ...userData, role: e.target.value });
@@ -75,14 +83,12 @@ const FormEditStaff = ({
               <option
                 value="1"
                 key="1"
-                selected={staff.role === 1 ? true : false}
               >
                 Owner
               </option>
               <option
                 value="2"
                 key="2"
-                selected={staff.role === 2 ? true : false}
               >
                 Staff
               </option>
@@ -109,14 +115,14 @@ const FormEditStaff = ({
               Services(Please choose services again)
             </label>
 
-            {staff.services && (
+            {staff[0]?.services && (
               <>
                 <br />
                 <b>Selected Services</b>
                 <br />
-                {staff.services.map((s) => (
-                  <i key={s.id}>{s.name}</i>
-                ))}
+                {services.map((service)=>[...staff[0]?.services_clients.map(ele=>ele.service_id)].services.map((s) => s === service.id && (
+                  <p key={s}>{service.name}</p>
+                )))}
               </>
             )}
             {services &&
@@ -155,7 +161,7 @@ const FormEditStaff = ({
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;Add Staff
+          &nbsp;&nbsp;Edit Staff 
         </button>
       </div>
     </form>
