@@ -21,6 +21,7 @@ const FormEditTimings = ({
               className="form-check-input"
               name="alltime"
               type="checkbox"
+              checked={allTime}
               onChange={(e) => {
                 setAllTime(!allTime);
               }}

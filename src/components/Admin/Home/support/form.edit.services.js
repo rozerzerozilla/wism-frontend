@@ -70,7 +70,7 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
     
   return (
       <Modal open={openModal} onClose={handleClose} center>
-          <h5>Edit category</h5>
+          <h5>Edit Services</h5>
           <form
               className="mx-3 my-3"
               onSubmit={submitHandler}
