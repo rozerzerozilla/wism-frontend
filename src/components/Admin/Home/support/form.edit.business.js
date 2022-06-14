@@ -194,7 +194,7 @@ const FormEditBusiness = ({
               />
             )}
             <br />
-            <label>Premiure Ad Banner(750w * 150h pixels )</label>
+            <label>Premium Ad Banner(750w * 150h pixels )</label>
             <input
               type="file"
               name="ad1"
