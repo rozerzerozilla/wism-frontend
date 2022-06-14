@@ -200,7 +200,7 @@ const FormAddBusiness = ({
         <label className={style.label}>Advertisement Banners</label>
         <div className="row">
           <div className="col-6">
-            <label>Premiure Ad Banner(750w * 150h pixels )</label>
+            <label>Premium Ad Banner(750w * 150h pixels )</label>
             <input
               type="file"
               name="ad1"
