@@ -1,16 +1,15 @@
 import React, { useEffect } from "react"
-
-import axios from 'axios';
 import validator from "validator";
 import Modal from 'react-responsive-modal'
-import { URL } from '../../../../api/admin.api'
 import { toast } from 'react-toastify';
 import { patchData, getData } from '../../../../redux/actions/admin.actions';
 import { useDispatch } from "react-redux";
 import ActionTypes from "../../../../helpers/action.types";
+import { useHistory } from "react-router-dom";
 
 
-function EditServices({ openModal, handleClose, serviceId, services }) {
+function EditServices({ openModal, handleClose, serviceId, services, id }) {
+    const history = useHistory();
     const dispatch = useDispatch();
     const[errors,setErrors] = React.useState(null);
     const[success,setSuccess] = React.useState(null);
@@ -60,6 +59,7 @@ function EditServices({ openModal, handleClose, serviceId, services }) {
                 setIsLoading
             )
         );
+        history.push(`/admin/business/${id}`);
     }
 
     useEffect(() => {
@@ -70,7 +70,7 @@ function EditServices({ openModal, handleClose, serviceId, services }) {
     
   return (
       <Modal open={openModal} onClose={handleClose} center>
-          <h5>Edit category</h5>
+          <h5>Edit Services</h5>
           <form
               className="mx-3 my-3"
               onSubmit={submitHandler}

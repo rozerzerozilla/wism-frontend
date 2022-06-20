@@ -25,6 +25,7 @@ const FormAddBusiness = ({
   success,
   business,
   postalLocalities,
+  handleBackRoute,
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
   const [showTiming, setShowTiming] = useState(false);
@@ -201,7 +202,7 @@ const FormAddBusiness = ({
               />
             )}
             <br />
-            <label>Premiure Ad Banner(750w * 150h pixels )</label>
+            <label>Premium Ad Banner(750w * 150h pixels )</label>
             <input
               type="file"
               name="ad1"
@@ -485,6 +486,12 @@ const FormAddBusiness = ({
             ></span>
           )}
           &nbsp;&nbsp;Add My Business
+        </button>
+        <button
+          type="button"
+          className="btn bg-secondary w-50 mt-4 mb-0"
+          onClick={handleBackRoute}
+        >Cancel
         </button>
       </div>
     </form>

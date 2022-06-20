@@ -31,6 +31,7 @@ import AdminBusinesses from "./components/Admin/Home/Businesses";
 import AdminBusiness from "./components/Admin/Home/Business";
 import AdminAddService from "./components/Admin/Home/AddServices";
 import AddBusinessStaff from "./components/Admin/Home/AddStaff";
+import EditBusinessStaff from "./components/Admin/Home/EditStaff";
 import AdminAddBusiness from "./components/Admin/Home/AddBusiness";
 import AdminCategories from "./components/Admin/Home/Categories";
 import AdminSubCategories from "./components/Admin/Home/SubCategories";
@@ -108,6 +109,11 @@ function App() {
         path="/admin/business/emp/:id"
         exact
         component={AddBusinessStaff}
+      />
+      <AdminRoutes
+        path="/admin/business/emp/:id/:clientID"
+        exact
+        component={EditBusinessStaff}
       />
       <AdminRoutes
         path="/admin/addbusiness"

@@ -26,6 +26,7 @@ const FormAddBusiness = ({
   states,
   cities,
   postalLocalities,
+  handleBackRoute
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
   const [showTiming, setShowTiming] = useState(false);
@@ -199,7 +200,7 @@ const FormAddBusiness = ({
         <label className={style.label}>Advertisement Banners</label>
         <div className="row">
           <div className="col-6">
-            <label>Premiure Ad Banner(750w * 150h pixels )</label>
+            <label>Premium Ad Banner(750w * 150h pixels )</label>
             <input
               type="file"
               name="ad1"
@@ -491,7 +492,7 @@ const FormAddBusiness = ({
       <div className="text-center">
         <button
           type="submit"
-          className="btn bg-gradient-info w-50 mt-4 mb-0"
+          className="btn bg-gradient-info w-25 mt-4 mb-0 mx-auto"
           disabled={isLoading}
         >
           {isLoading && (
@@ -502,6 +503,12 @@ const FormAddBusiness = ({
             ></span>
           )}
           &nbsp;&nbsp;Add My Business
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary w-25 mt-4 mb-0 mx-auto"
+          onClick={handleBackRoute}
+        >Cancel
         </button>
       </div>
     </form>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminFooter from "./layout/admin.footer";
 import AdminHeader from "./layout/admin.header";
 import AdminNavMenu from "./layout/admin.navmenu";
@@ -8,6 +8,7 @@ import ActionTypes from "../../../helpers/action.types";
 import * as Actions from "../../../redux/actions/admin.actions";
 import { AddService } from "../../../helpers/admin.joi";
 import { useHistory, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 const AdminAddService = () => {
   const { id } = useParams();
   const history = useHistory();
@@ -39,18 +40,27 @@ const AdminAddService = () => {
       )
     );
     setUserData({});
-    history.replace(`/admin/business/${id}`);
+    history.push(`/admin/business/${id}`);
   };
 
   const validateForm = () => {
     const results = AddService.validate(userData);
     if (results.error) {
-      setErrors(results.error.details[0].message);
+      toast.error(results.error.details[0].message)
       return false;
     }
-    setErrors("");
+    setErrors(null);
     return results.value;
   };
+
+  useEffect(()=>{
+    if(errors){
+      toast.error(errors)
+    }
+    if(success){
+      toast.success(success)
+    }
+  },[errors, success])
 
   return (
     <>
@@ -64,25 +74,6 @@ const AdminAddService = () => {
                 <div className="card-header pb-0">
                   <h6>Add Service</h6>
                 </div>
-                {errors && (
-                  <div
-                    className="alert alert-danger mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {errors}
-                  </div>
-                )}
-
-                {success && (
-                  <div
-                    className="alert alert-success mx-5"
-                    role="alert"
-                    style={{ color: "white" }}
-                  >
-                    {success}
-                  </div>
-                )}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddServices
                     onSubmit={onSubmit}
