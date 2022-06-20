@@ -1,9 +1,9 @@
 import axios from "axios";
-// export const URL = "http://localhost:5500/api/clients";
-// const PURL = "http://localhost:5500/api/public";
+export const URL = "http://localhost:5500/api/clients";
+const PURL = "http://localhost:5500/api/public";
 
-export const URL = "https://api.wism.in/api/clients";
-const PURL = "https://api.wism.in/api/public";
+// export const URL = "https://api.wism.in/api/clients";
+// const PURL = "https://api.wism.in/api/public";
 
 const userData = JSON.parse(localStorage.getItem("userData"));
 // if (userData && userData.token) {

@@ -261,35 +261,6 @@ const FormAddBusiness = ({
 
       {showBusiness && (
         <div className="mb-3">
-          <div className="row">
-            <div className="col-6">
-              <label className={style.label}>Address1 *</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address1"
-                name="address1"
-                value={userData.address1 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address1: (e.target.value).replace(/ /g,"") });
-                }}
-                required
-              />
-            </div>
-            <div className="col-6">
-              <label className={style.label}>Address2(optional)</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address2"
-                name="address2"
-                value={userData.address2 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address2: e.target.value });
-                }}
-              />
-            </div>
-          </div>
           
           <div className="row">
             <div className="col-6">
@@ -388,7 +359,33 @@ const FormAddBusiness = ({
             </div>
           </div>
           <div className="row">
-            
+            <div className="col-6">
+              <label className={style.label}>Unit *</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address1"
+                name="address1"
+                value={userData.address1 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address1: (e.target.value).replace(/ /g, "") });
+                }}
+                required
+              />
+            </div>
+            <div className="col-6">
+              <label className={style.label}>Street(optional)</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address2"
+                name="address2"
+                value={userData.address2 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address2: e.target.value });
+                }}
+              />
+            </div>
           </div>
           <div className="mt-3"></div>
           <label className={style.label}>Geospatical Coordination</label>
