@@ -1,6 +1,6 @@
 import axios from "axios";
-const URL = "http://localhost:5500/api/public";
-// const URL = "https://api.wism.in/api/public";
+// const URL = "http://localhost:5500/api/public";
+const URL = "https://api.wism.in/api/public";
 
 //generic functions
 export const postData = (postdata, url) => {

@@ -257,35 +257,6 @@ const FormEditBusiness = ({
         <div className="mb-3">
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Address1</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address1"
-                name="address1"
-                value={userData.address1 || business.address1 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address1: e.target.value });
-                }}
-                required
-              />
-            </div>
-            <div className="col-6">
-              <label className={style.label}>Address2(optional)</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address2"
-                name="address2"
-                value={userData.address2 || business.address2 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address2: e.target.value });
-                }}
-              />
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-6">
               <label className={style.label}>Postal Code *</label>
               <input
                 type="text"
@@ -356,6 +327,36 @@ const FormEditBusiness = ({
                   setuserData({ ...userData, state: e.target.value });
                 }}
                 required
+              />
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col-6">
+              <label className={style.label}>Unit</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address1"
+                name="address1"
+                value={userData.address1 || business.address1 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address1: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div className="col-6">
+              <label className={style.label}>Street (optional)</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address2"
+                name="address2"
+                value={userData.address2 || business.address2 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address2: e.target.value });
+                }}
               />
             </div>
           </div>

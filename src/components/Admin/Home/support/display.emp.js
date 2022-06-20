@@ -49,7 +49,7 @@ const DisplayEmployees = ({ staff }) => {
 
     event.preventDefault();
     setIsLoading(true);
-
+    console.log(userData);
     if (validator.isNumeric(userData.name) || userData.name === "") {
       InvalidEmployeeError("employee name");
       setIsLoading(false);
@@ -58,11 +58,9 @@ const DisplayEmployees = ({ staff }) => {
       InvalidEmployeeError("employee phone");
       setIsLoading(false);
     }
-    else if (userData.email.length > 0) {
-      if (!validator.isEmail(userData.email) || userData.email === "") {
-        InvalidEmployeeError("employee email");
-        setIsLoading(false);
-      }
+    else if (!validator.isEmail(userData.email) || userData.email === "") {
+      InvalidEmployeeError("employee email");
+      setIsLoading(false);
     }
     else if (userData.name.includes(" ") || userData.name.includes("")) {
       setEdit(false);
@@ -125,7 +123,7 @@ const DisplayEmployees = ({ staff }) => {
   }
   const submitDelete = (id) => {
     axios.delete(`${URL}/home/employee/${staff.id}`).then(res => {
-      toast.success("deleted Successfully")
+      toast.success("deleted Successfully");
       setTimeout(() => {
         window.location.reload();
       }, 3000)
@@ -215,7 +213,7 @@ const DisplayEmployees = ({ staff }) => {
             <MdBorderColor
               onClick={openEdit}
               size={20}
-            />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <MdDelete
               onClick={openDelete}
               size={20}
