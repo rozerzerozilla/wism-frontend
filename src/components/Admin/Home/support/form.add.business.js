@@ -149,7 +149,7 @@ const FormAddBusiness = ({
         </div>
         <div className="row mt-3">
           <div className="col-12">
-            {subcategories &&
+            {subcategories && subcategories.length > 0 &&
               subcategories.map((subcat) => {
                 return (
                   <div className="form-check" key={subcat.id}>

@@ -1,9 +1,9 @@
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
 import LeftBar from "./LeftBar";
 import RightBar from "./RightBar";
 import DisplayBusinesses from "../support/Business";
 import { toast } from "react-toastify";
-import React from "react";
 
 const HomeContent = ({
   isLoading,
@@ -19,12 +19,20 @@ const HomeContent = ({
   location,
   dist,
 }) => {
+  const history = useHistory();
+
   React.useEffect(() => {
     if (errors !== null && errors !== ""){
       toast.error(errors)
     }
   }, [errors])
   console.log(dist)
+
+  useEffect(() => {
+    console.log(history.location);
+    localStorage.setItem("search-route", history.location.search)
+  },[history])
+
   return (
     <section className="featured mt-4">
       <div className="container">
@@ -48,7 +56,7 @@ const HomeContent = ({
               </div>
             )}
             <div className="row mx-3">
-              {businesses?.length <= 0 ? <h5>No services found near by area with the {dist}KM selected range</h5> :
+              {history.location.pathname === "/search" && businesses?.length <= 0 ? <h5>No services found near by area with the {dist} KM selected range</h5> :
                 businesses.map((business) => {
                   return (
                     <DisplayBusinesses key={business.id} business={business} />

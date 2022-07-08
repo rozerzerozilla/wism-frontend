@@ -23,6 +23,7 @@ export const getData =
   (type, url, setErrors, setIsLoading) => async (dispatch) => {
     try {
       const { data } = await API.getData(url);
+      console.log(data)
       dispatch({ type: type, payload: data });
       setIsLoading(false);
     } catch (error) {

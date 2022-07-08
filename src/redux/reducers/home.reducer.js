@@ -11,6 +11,7 @@ const initialState = {
   timeslots: [],
   tokens: [],
   city: [],
+  pincodeDetails:{},
 };
 
 const HomeReducer = (state = initialState, action) => {
@@ -40,6 +41,8 @@ const HomeReducer = (state = initialState, action) => {
       return { ...state, tokens: [...state.tokens, action.payload] };
     case ActionTypes.GET_CITY_NAME:
       return { ...state, city: action.payload };
+    case ActionTypes.GET_PINCODE_DETAILS:
+      return { ...state, pincodeDetails: action.payload };
 
     default:
       return state;

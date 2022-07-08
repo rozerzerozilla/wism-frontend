@@ -144,21 +144,33 @@ const AdminAddBusiness = () => {
   }, [latlng])
 
   const getSubcategories = (id) => {
-    dispatch(
-      Actions.getPData(
-        ActionTypes.GET_SUBCATEGORY,
-        `/subcategories/${id}`,
-        setErrors,
-        setIsLoading
-      )
-    );
+    // console.log(id)
+    if (id !== "") {
+      dispatch(
+        Actions.getPData(
+          ActionTypes.GET_SUBCATEGORY,
+          `/subcategories/${id}`,
+          setErrors,
+          setIsLoading
+        )
+      );
+    } else {
+      dispatch({
+        type: ActionTypes.GET_SUBCATEGORY,
+        payload: []
+      })
+      setuserData(ps=>({...ps, subcategories:[]}))
+    }
   };
 
   //add the client
   const onSubmit = (event) => {
     event.preventDefault();
     const validInputs = validateForm();
-    if (!validInputs) return null;
+    if (!validInputs) {
+      toast.error("Kindly Check All input fields");
+      return null;
+    }
     const formData = new FormData();
     formData.append("name", userData.name);
     formData.append("phone", userData.phone);

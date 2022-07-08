@@ -23,7 +23,7 @@ const FormEditTimings = ({
               type="checkbox"
               checked={allTime}
               onChange={(e) => {
-                setAllTime(!allTime);
+                setAllTime(ps=>!ps);
               }}
             />
             <label className="form-check-label">Opens 24 hours</label>

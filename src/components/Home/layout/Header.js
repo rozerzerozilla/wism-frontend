@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "../home.module.css";
 import "font-awesome/css/font-awesome.min.css";
+import {FiMapPin} from "react-icons/fi"
 import Logo from "../../../assets/img/lg2.png";
 const HomeHeader = ({
   categories,
@@ -15,6 +16,7 @@ const HomeHeader = ({
   city,
   setInputBusiness,
   filterForm2,
+  setPincodeModal,
 }) => {
   return (
     <>
@@ -67,18 +69,25 @@ const HomeHeader = ({
                         <div className="search-bar">
                           <div className="search-inner">
                             <form className="search-form" onSubmit={filterForm}>
-                              <div className="form-group">
+                              <div className="form-group align-items-center d-flex align-content-center">
+                                {/* <div className="text-left text-black text-sm font-weight-bold" style={{position:"absolute", top:0,left:0}}>Change Your City</div> */}
                                 <input
                                   type="text"
                                   name="city"
                                   className="form-control"
-                                  placeholder="Your City"
+                                  placeholder="Change Your City"
                                   value={city || cityName?.address?.city || ""}
                                   onChange={(e) => {
                                     setCity(e.target.value);
                                   }}
                                   disabled
                                 />
+                                <div>
+                                  <FiMapPin
+                                    onClick={(e) => setPincodeModal(true)}
+                                    style={{ backgroundColor: "#f1f1f1", color: "#000" }}
+                                  />
+                                </div>
                               </div>
                               <div className="form-group">
                                 <input

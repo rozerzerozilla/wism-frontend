@@ -11,7 +11,8 @@ import * as Actions from "../../../redux/actions/admin.actions";
 import { Redirect, useHistory } from "react-router-dom";
 const AdminEditBusiness = () => {
   const history = useHistory();
-  const { id } = useParams();
+  const { id, ...rest } = useParams();
+  console.log(rest)
   const storedData = JSON.parse(localStorage.getItem("userData"));
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(false);
@@ -92,8 +93,7 @@ const AdminEditBusiness = () => {
   var categories = [];
   var subcategories = [];
   var latlng = [];
-  var business;
-  business = useSelector((state) => state.admin.business);
+  var business = useSelector((state) => state.admin.business);
 
   categories = useSelector((state) => {
     return state.clients.categories;
@@ -143,14 +143,23 @@ const AdminEditBusiness = () => {
   }
 
   const getSubcategories = (id) => {
-    dispatch(
-      Actions.getPData(
-        ActionTypes.GET_SUBCATEGORY,
-        `/subcategories/${id}`,
-        setErrors,
-        setIsLoading
-      )
-    );
+    // console.log(id)
+    if (id !== "") {
+      dispatch(
+        Actions.getPData(
+          ActionTypes.GET_SUBCATEGORY,
+          `/subcategories/${id}`,
+          setErrors,
+          setIsLoading
+        )
+      );
+    } else {
+      dispatch({
+        type: ActionTypes.GET_SUBCATEGORY,
+        payload: []
+      })
+      setuserData(ps => ({ ...ps, subcategories: [] }))
+    }
   };
 
   //add the client
@@ -303,6 +312,9 @@ const AdminEditBusiness = () => {
       getLatLng(business.postalcode)
     }
 
+    if (business?.open_all_time) {
+      setAllTime(business?.open_all_time)
+    }
     const datas = { ...userData }
     
     if (business?.timings) {
