@@ -12,6 +12,7 @@ const FormEditTimings = ({
   setAllTime,
   business,
 }) => {
+  console.log(holidays, business)
   return (
     <div className="mb-3  mx-4">
       <div className="row mt-3">
@@ -21,8 +22,9 @@ const FormEditTimings = ({
               className="form-check-input"
               name="alltime"
               type="checkbox"
+              checked={allTime}
               onChange={(e) => {
-                setAllTime(!allTime);
+                setAllTime(ps=>!ps);
               }}
             />
             <label className="form-check-label">Opens 24 hours</label>
@@ -858,10 +860,15 @@ const FormEditTimings = ({
               width: "100%",
             }}
           />
-          {/* <br />
+          <br />
           <p>
-            Chosen Holidays : {business.holidays && <>{business.holidays}</>}
-          </p> */}
+            {business.holidays &&
+              business.holidays !== "" &&
+              business.holidays !== null &&
+              business.holidays !== undefined &&
+              business.holidays !== NaN &&
+              <>Chosen Holidays :{" "}{business.holidays}</>}
+          </p>
         </div>
       </div>
       <div className="row my-2 mt-4">

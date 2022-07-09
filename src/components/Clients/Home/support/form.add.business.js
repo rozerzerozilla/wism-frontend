@@ -26,6 +26,7 @@ const FormAddBusiness = ({
   business,
   postalLocalities,
   handleBackRoute,
+  edit = false,
 }) => {
   const [showBusiness, setShowBusiness] = useState(false);
   const [showTiming, setShowTiming] = useState(false);
@@ -273,35 +274,7 @@ const FormAddBusiness = ({
 
       {showBusiness && (
         <div className="mb-3">
-          <div className="row">
-            <div className="col-6">
-              <label className={style.label}>Address1</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address1"
-                name="address1"
-                value={userData.address1 || business.address1 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address1: e.target.value });
-                }}
-                required
-              />
-            </div>
-            <div className="col-6">
-              <label className={style.label}>Address2(optional)</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address2"
-                name="address2"
-                value={userData.address2 || business.address2 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address2: e.target.value });
-                }}
-              />
-            </div>
-          </div>
+          
           <div className="row">
             <div className="col-6">
               <label className={style.label}>Postal Code *</label>
@@ -344,6 +317,8 @@ const FormAddBusiness = ({
                 {postalLocalities?.map((ele, idx) => <option value={ele} key={idx}>{ele}</option>)}
               </select>
             </div>
+          </div>
+          <div className="row">
             <div className="col-6">
               <label className={style.label}>City</label>
               <input
@@ -359,8 +334,6 @@ const FormAddBusiness = ({
                 required
               />
             </div>
-          </div>
-          <div className="row">
             <div className="col-6">
               <label className={style.label}>State</label>
               <input
@@ -377,6 +350,37 @@ const FormAddBusiness = ({
               />
             </div>
           </div>
+
+          <div className="row">
+            <div className="col-6">
+              <label className={style.label}>Street</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address1"
+                name="address1"
+                value={userData.address1 || business.address1 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address1: e.target.value });
+                }}
+                required
+              />
+            </div>
+            <div className="col-6">
+              <label className={style.label}>Unit</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address2"
+                name="address2"
+                value={userData.address2 || business.address2 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address2: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+
           <div className="mt-3"></div>
           <label className={style.label}>Geospatical Coordination</label>
           <div className="row">
@@ -469,6 +473,7 @@ const FormAddBusiness = ({
           setHolidays={setHolidays}
           allTime={allTime}
           setAllTime={setAllTime}
+          edit={edit}
         />
       )}
 
@@ -485,7 +490,7 @@ const FormAddBusiness = ({
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;Add My Business
+          &nbsp;&nbsp;{edit ? "Edit " :"Add "} My Business
         </button>
         <button
           type="button"

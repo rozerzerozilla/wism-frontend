@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import TimeRange from 'react-time-range';
+import moment from 'moment';
 import style from "../../admin.module.css";
 const FormEditStaff = ({
   onSubmit,
@@ -96,6 +98,11 @@ const FormEditStaff = ({
           </div>
 
           <div className="col-6">
+            {/* <TimeRange
+              startMoment={new Date().toISOString()}
+              endMoment={new Date().toISOString()}
+              onChange={(val)=>console.log(val)}
+            /> */}
             <label className={style.label}>Staff Break Time</label>
             <input
               type="text"

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import AdminFooter from "./layout/admin.footer";
 import AdminHeader from "./layout/admin.header";
 import AdminNavMenu from "./layout/admin.navmenu";
@@ -10,6 +11,7 @@ import FormEditStaff from "./support/form.edit.staff";
 import { AddBStaffs } from "../../../helpers/admin.joi";
 import { toast } from "react-toastify";
 const EditBusinessStaff = () => {
+  const [timeRange, setTimeRange] = useState(['10:00', '11:00']);
   const { id, clientID } = useParams();
   const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
@@ -96,7 +98,7 @@ const EditBusinessStaff = () => {
             email: staff[0].email,
             username: staff[0].username,
             services: [...staff[0]?.services_clients.map(ele=>ele.service_id)],
-            break_time: JSON.parse(staff[0]?.break_time),
+            break_time: staff[0]?.break_time,
             business_id: id,
             role: staff[0].role,
         }
@@ -124,6 +126,10 @@ const EditBusinessStaff = () => {
             <div className="col-12">
               <div className="card mb-4">
                 <div className="card-body px-0 pt-0 pb-2">
+                  {/* <TimeRangePicker
+                    onChange={setTimeRange}
+                    value={timeRange}
+                  /> */}
                   <FormEditStaff
                     onSubmit={onSubmit}
                     userData={userData}

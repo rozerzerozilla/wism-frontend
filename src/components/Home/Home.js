@@ -76,6 +76,10 @@ const Home = () => {
 		if (city) {
 			setCity(city)
 		}
+		const pin = localStorage.getItem("current-web-pincode");
+		if (pin !== null && pin !== undefined && pin !== "") {
+			handleGetPincodeDetails(pin)
+		}
 	},[])
 
 	const filterForm = (event) => {

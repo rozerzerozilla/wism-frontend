@@ -19,12 +19,12 @@ const DisplayTokens = ({
               <table className="table align-items-center mb-0 ">
                 <thead>
                   <tr>
-                    <th className="text-xxs font-weight-bolder">Client</th>
-                    <th className="text-xxs font-weight-bolder">Phone</th>
-                    <th className="text-xxs font-weight-bolder">Service</th>
-                    <th className="text-xxs font-weight-bolder">Date</th>
-                    <th className="text-xxs font-weight-bolder">From - To</th>
-                    <th className="text-xxs font-weight-bolder">Action</th>
+                    <th className="text-sm font-weight-bolder">Client</th>
+                    <th className="text-sm font-weight-bolder">Phone</th>
+                    <th className="text-sm font-weight-bolder">Service</th>
+                    <th className="text-sm font-weight-bolder">Date</th>
+                    <th className="text-sm font-weight-bolder">From - To</th>
+                    <th className="text-sm font-weight-bolder">Action</th>
                   </tr>
                 </thead>
                 <tbody>

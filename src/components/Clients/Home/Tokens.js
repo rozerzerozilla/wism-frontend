@@ -66,6 +66,14 @@ const ClientTokens = () => {
         setIsLoading
       )
     );
+    dispatch(
+      Actions.getData(
+        ActionTypes.CLIENT_GET_TOKENS,
+        "/home/tokens",
+        setErrors,
+        setIsLoading
+      )
+    );
   };
 
   return (

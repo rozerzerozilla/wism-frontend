@@ -147,14 +147,12 @@ const Search = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(cityName);
-  }, [cityName]);
-
-  useEffect(() => {
     console.log(history.location);
-    localStorage.setItem("search-route", history.location.search)
+    // localStorage.setItem("search-route", history.location.search)
     let pincode = localStorage.getItem("current-web-pincode");
-    handleGetPincodeDetails(pincode)
+    if (pincode !== null && pincode !== undefined && pincode !== "") {
+      handleGetPincodeDetails(pincode)
+    }
     startUpCall()
   }, [history, history.location, history.location.search])
 
@@ -198,7 +196,7 @@ const Search = () => {
   }
 
   return (
-    <div className="container-fuild" style={{ backgroundColor: "white" }}>
+    isLoading  ? <h1>Loading...</h1> :<div className="container-fuild" style={{ backgroundColor: "white" }}>
       <HomeHeader
         categories={categories}
         subcategories={subcategories}

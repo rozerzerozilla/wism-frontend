@@ -84,6 +84,7 @@ const EditBusiness = () => {
   const [defaultLocation, setDefaultLocation] = useState(Loc);
   const [location, setLocation] = useState(Loc);
   const [zoom, setZoom] = useState(DefaultZoom);
+  const [postal_localities, setPostalLocalities] = useState([]);
 
   const dispatch = useDispatch();
   var categories = [];
@@ -206,37 +207,29 @@ const EditBusiness = () => {
     return results.value;
   };
 
-  const getLatLng = async () => {
+  const getLatLng = async (zipcode) => {
     try {
-      // if (userData.postalcode.length === 6) {
-      const add =
-        userData.address1 +
-        "," +
-        userData.address2 +
-        "," +
-        userData.street +
-        "," +
-        userData.city +
-        "," +
-        userData.state;
-      dispatch(
-        Actions.getData(
-          ActionTypes.GET_LATLNG,
-          `/home/getlatlng?address=${add}`,
-          setErrors,
-          setIsLoading
-        )
-      );
-      if (latlng.lat && latlng.lng) {
-        setDefaultLocation({
-          lat: latlng.lat,
-          lng: latlng.lng,
-        });
-        setLocation({ lat: latlng.lat, lng: latlng.lng });
+      if (zipcode.length === 6) {
+        dispatch(
+          Actions.getData(
+            ActionTypes.GET_LATLNG,
+            `/home/getlatlng?address=${zipcode}`,
+            setErrors,
+            setIsLoading
+          )
+        );
+        if (latlng.lat && latlng.lng) {
+          setDefaultLocation({
+            lat: latlng.lat,
+            lng: latlng.lng,
+          });
+          setLocation({ lat: latlng.lat, lng: latlng.lng });
+        }
       }
-      // }
-    } catch (e) {}
+    } catch (e) { }
   };
+
+
 
   useEffect(() => {
     if (success) {
@@ -262,77 +255,124 @@ const EditBusiness = () => {
         setIsLoading
       )
     );
-    try {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        if (position) {
-          // DefaultLocation.lat = position.coords.latitude;
-          // DefaultLocation.lng = position.coords.longitude;
-          setDefaultLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-          setLocation({
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-          });
-        }
-      });
-    } catch (e) {}
+
+    // try {
+    //   navigator.geolocation.getCurrentPosition(function (position) {
+    //     if (position) {
+    //       // DefaultLocation.lat = position.coords.latitude;
+    //       // DefaultLocation.lng = position.coords.longitude;
+    //       setDefaultLocation({
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude,
+    //       });
+    //       setLocation({
+    //         lat: position.coords.latitude,
+    //         lng: position.coords.longitude,
+    //       });
+    //     }
+    //   });
+    // } catch (e) {}
+
   }, [dispatch]);
+
+  // setting the postal localities
   useEffect(() => {
+    console.log(latlng);
+    setDefaultLocation({
+      lat: latlng.lat,
+      lng: latlng.lng,
+    });
+    setLocation({ lat: latlng?.lat, lng: latlng?.lng });
+    var postalData = latlng?.address_components;
+    postalData?.map((ele, idx) => {
+      if (ele.types[0] === 'administrative_area_level_1') {
+        setuserData(prevState => ({
+          ...prevState,
+          state: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'administrative_area_level_2') {
+        setuserData(prevState => ({
+          ...prevState,
+          city: ele.long_name,
+        }))
+      } else if (ele.types[0] === 'locality') {
+        setuserData(prevState => ({
+          ...prevState,
+          street: ele.long_name,
+        }))
+      }
+    })
+    setPostalLocalities(latlng.postal_localities)
+  }, [latlng])
+
+
+
+  useEffect(() => {
+    if (business?.postalcode !== null && business?.postalcode !== "") {
+      getLatLng(business.postalcode)
+    }
+    if (business?.open_all_time) {
+      setAllTime(business?.open_all_time)
+    }
+    let datas = {...userData}
     if (business?.timings) {
-      userData.monday.monday_work_from = business?.timings[0]?.work_from || "";
-      userData.monday.monday_work_to = business?.timings[0]?.work_to || "";
-      userData.monday.monday_break_from =
+      datas.monday.monday_work_from = business?.timings[0]?.work_from || "";
+      datas.monday.monday_work_to = business?.timings[0]?.work_to || "";
+      datas.monday.monday_break_from =
         business?.timings[0]?.break_from || "";
-      userData.monday.monday_break_to = business?.timings[0]?.break_to || "";
+      datas.monday.monday_break_to = business?.timings[0]?.break_to || "";
 
-      userData.tuesday.tuesday_work_from =
+      datas.tuesday.tuesday_work_from =
         business?.timings[1]?.work_from || "";
-      userData.tuesday.tuesday_work_to = business?.timings[1]?.work_to || "";
-      userData.tuesday.tuesday_break_from =
+      datas.tuesday.tuesday_work_to = business?.timings[1]?.work_to || "";
+      datas.tuesday.tuesday_break_from =
         business?.timings[1]?.break_from || "";
-      userData.tuesday.tuesday_break_to = business?.timings[1]?.break_to || "";
+      datas.tuesday.tuesday_break_to = business?.timings[1]?.break_to || "";
 
-      userData.wednesday.wednesday_work_from =
+      datas.wednesday.wednesday_work_from =
         business?.timings[2]?.work_from || "";
-      userData.wednesday.wednesday_work_to =
+      datas.wednesday.wednesday_work_to =
         business?.timings[2]?.work_to || "";
-      userData.wednesday.wednesday_break_from =
+      datas.wednesday.wednesday_break_from =
         business?.timings[2]?.break_from || "";
-      userData.wednesday.wednesday_break_to =
+      datas.wednesday.wednesday_break_to =
         business?.timings[2]?.break_to || "";
 
-      userData.thursday.thursday_work_from =
+      datas.thursday.thursday_work_from =
         business?.timings[3]?.work_from || "";
-      userData.thursday.thursday_work_to = business?.timings[3]?.work_to || "";
-      userData.thursday.thursday_break_from =
+      datas.thursday.thursday_work_to = business?.timings[3]?.work_to || "";
+      datas.thursday.thursday_break_from =
         business?.timings[3]?.break_from || "";
-      userData.thursday.thursday_break_to =
+      datas.thursday.thursday_break_to =
         business?.timings[3]?.break_to || "";
 
-      userData.friday.friday_work_from = business?.timings[4]?.work_from || "";
-      userData.friday.friday_work_to = business?.timings[4]?.work_to || "";
-      userData.friday.friday_break_from =
+      datas.friday.friday_work_from = business?.timings[4]?.work_from || "";
+      datas.friday.friday_work_to = business?.timings[4]?.work_to || "";
+      datas.friday.friday_break_from =
         business?.timings[4]?.break_from || "";
-      userData.friday.friday_break_to = business?.timings[4]?.break_to || "";
+      datas.friday.friday_break_to = business?.timings[4]?.break_to || "";
 
-      userData.saturday.saturday_work_from =
+      datas.saturday.saturday_work_from =
         business?.timings[5]?.work_from || "";
-      userData.saturday.saturday_work_to = business?.timings[5]?.work_to || "";
-      userData.saturday.saturday_break_from =
+      datas.saturday.saturday_work_to = business?.timings[5]?.work_to || "";
+      datas.saturday.saturday_break_from =
         business?.timings[5]?.break_from || "";
-      userData.saturday.saturday_break_to =
+      datas.saturday.saturday_break_to =
         business?.timings[5]?.break_to || "";
 
-      userData.sunday.sunday_work_from = business?.timings[6]?.work_from || "";
-      userData.sunday.sunday_work_to = business?.timings[6]?.work_to || "";
-      userData.sunday.sunday_break_from =
+      datas.sunday.sunday_work_from = business?.timings[6]?.work_from || "";
+      datas.sunday.sunday_work_to = business?.timings[6]?.work_to || "";
+      datas.sunday.sunday_break_from =
         business?.timings[6]?.break_from || "";
-      userData.sunday.sunday_break_to = business?.timings[6]?.break_to || "";
+      datas.sunday.sunday_break_to = business?.timings[6]?.break_to || "";
     }
-    userData.holidays_working.holiday_work_from = business.holiday_work_from;
-    userData.holidays_working.holiday_work_to = business.holiday_work_to;
+    datas.holidays_working.holiday_work_from = business.holiday_work_from;
+    datas.holidays_working.holiday_work_to = business.holiday_work_to;
+    setuserData(prevState => ({
+      ...prevState,
+      ...datas,
+      subcategories: business.subcategories?.split(',')
+    }))
   }, [business]);
   return (
     <>
@@ -380,8 +420,10 @@ const EditBusiness = () => {
                     allTime={allTime}
                     setAllTime={setAllTime}
                     getLatLng={getLatLng}
+                    postalLocalities={postal_localities}
                     success={success}
                     business={business}
+                    edit={true}
                   />
                 </div>
               </div>

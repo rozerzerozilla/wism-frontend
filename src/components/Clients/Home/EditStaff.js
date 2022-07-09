@@ -103,7 +103,7 @@ const EditStaff = () => {
     <>
       <ClientsNavMenu path="staffs" />
       <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        <ClientsHeader header="Add Staff" />
+        <ClientsHeader header="Edit Staff" />
         <div className="container mt-4">
           <div className="row">
             <div className="col-12">

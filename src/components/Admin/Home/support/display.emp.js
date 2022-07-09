@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import style from "../../../../components/Admin/admin.module.css";
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
@@ -11,10 +12,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator from 'validator';
 import axios from "axios";
-import {URL} from "../../../../api/admin.api"
+import { URL } from "../../../../api/admin.api"
+import * as Actions from "../../../../redux/actions/admin.actions";
+import ActionTypes from "../../../../helpers/action.types";
 
 const DisplayEmployees = ({ staff }) => {
-
+  const disptach = useDispatch();
   const [success, setSuccess] = useState(false);
   const [errors, setErrors] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

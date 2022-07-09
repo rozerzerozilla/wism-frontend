@@ -95,7 +95,7 @@ const ClientStaff = () => {
     <>
       <ClientsNavMenu path="staffs" />
       <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        <ClientsHeader header="Available Staffs" />
+        <ClientsHeader header="Available Staff" />
         <div className="container mt-4">
           <div className="row">
             <div className="col-12">
@@ -103,7 +103,7 @@ const ClientStaff = () => {
                 <div className="card-header pb-0">
                   <div className="row">
                     <div className="col-10">
-                      <h6>Staffs</h6>
+                      <h6>Staff</h6>
                     </div>
                     <div className="col-2">
                       <Link to="/clients/addstaffs" className="btn btn-primary">
