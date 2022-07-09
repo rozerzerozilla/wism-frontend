@@ -2,8 +2,8 @@ import SimpleImageSlider from "react-simple-image-slider";
 console.log(process.env.NODE_ENV)
 const AdHeader = () => {
   const images = [
-    { url: "https://api.wism.in00/a.png" },
-    { url: "https://api.wism.in:5500/b.jpg" },
+    { url: "https://api.wism.in/a.png" },
+    { url: "https://api.wism.in/b.jpg" },
   ];
   return (
     <div className="row mt-5">
