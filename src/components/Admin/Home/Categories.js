@@ -63,9 +63,9 @@ const AdminCategories = () => {
       }
       else {
         categoryUpdated();
-        // setTimeout(() => {
-        //   window.location.reload()
-        // }, 200)
+        setTimeout(() => {
+          window.location.reload()
+        }, 2000)
 
         dispatch(
           Actions.getData(
@@ -118,15 +118,19 @@ const AdminCategories = () => {
     }
     else {
       categoryDeleted();
-      dispatch(
-        Actions.getData(
-          ActionTypes.GET_CATEGORIES,
-          "/home/categories",
+      setTimeout(() => {
+        
+        
+        dispatch(
+          Actions.getData(
+            ActionTypes.GET_CATEGORIES,
+            "/home/categories",
           setErrors,
           setIsLoading
         )
-      );
-    }
+        );
+      },2000);
+      }
     setCatId(null)
     setCatname("")
   }

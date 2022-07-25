@@ -32,7 +32,8 @@ function DeleteModal({openModal, handleClose, data, staffId, id}) {
       toast.error(errors)
     }
     if(success){
-      toast.success(success);
+      toast.success('Staff Deleted Successfully');
+
       handleClose();
       Actions.getData(
         ActionTypes.ADMIN_GET_BUSINESS,
@@ -40,6 +41,9 @@ function DeleteModal({openModal, handleClose, data, staffId, id}) {
         setErrors,
         setIsLoading
       )
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000)
     }
   },[errors, success])
   return (

@@ -230,6 +230,15 @@ const AdminAddBusiness = () => {
     window.scrollTo(0, 0);
   };
 
+  useEffect(()=>{
+    if(errors){
+      toast.error(errors)
+    }
+    if(success){
+      toast.success('Business Added Successfully')
+    }
+  },[errors, success])
+
   //validate form
   const validateForm = () => {
     const results = AddBusiness.validate(userData);

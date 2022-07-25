@@ -82,8 +82,8 @@ const AddBusinessStaff = () => {
       toast.error(errors)
     }
     if(success){
+      toast.success('Staff Added Successfully')
       history.push(`/admin/business/${id}`);
-      toast.success(success)
     }
   },[errors, success])
 

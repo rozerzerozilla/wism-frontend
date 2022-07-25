@@ -284,7 +284,7 @@ const DisplayEmployees = ({ staff }) => {
           <div className="mb-3">
             <div className="row">
               <div className="col-6">
-                <label className={style.label}>Role {staff.role}</label>
+                <label className={style.label}>Role</label>
                 {
                   staff.role === 1 ? (
                     <select

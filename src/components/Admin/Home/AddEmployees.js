@@ -67,7 +67,7 @@ const AdminAddEmp = () => {
               <div className="card mb-4">
                 {errors && toast.success(errors)}
 
-                {success && toast.success(success)}
+                {success && toast.success('Added Successfully')}
                 <div className="card-body px-0 pt-0 pb-2">
                   <FormAddEmp
                     onSubmit={onSubmit}

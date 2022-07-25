@@ -40,7 +40,7 @@ const AdminAddService = () => {
       )
     );
     setUserData({});
-    history.push(`/admin/business/${id}`);
+    // history.push(`/admin/business/${id}`);
   };
 
   const validateForm = () => {
@@ -58,7 +58,8 @@ const AdminAddService = () => {
       toast.error(errors)
     }
     if(success){
-      toast.success(success)
+      toast.success('Service added successfully');
+      history.push(`/admin/business/${id}`);
     }
   },[errors, success])
 
