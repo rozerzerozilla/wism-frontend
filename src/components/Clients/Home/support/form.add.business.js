@@ -320,7 +320,7 @@ const FormAddBusiness = ({
           </div>
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>City</label>
+              <label className={style.label}>City *</label>
               <input
                 type="text"
                 className="form-control"
@@ -335,7 +335,7 @@ const FormAddBusiness = ({
               />
             </div>
             <div className="col-6">
-              <label className={style.label}>State</label>
+              <label className={style.label}>State *</label>
               <input
                 type="text"
                 className="form-control"
@@ -352,8 +352,23 @@ const FormAddBusiness = ({
           </div>
 
           <div className="row">
+           
             <div className="col-6">
-              <label className={style.label}>Street</label>
+              <label className={style.label}>Unit *</label>
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Address2"
+                name="address2"
+                value={userData.address2 || business.address2 || ""}
+                onChange={(e) => {
+                  setuserData({ ...userData, address2: e.target.value });
+                }}
+              />
+            </div>
+
+            <div className="col-6">
+              <label className={style.label}>Street (optional)</label>
               <input
                 type="text"
                 className="form-control"
@@ -364,19 +379,6 @@ const FormAddBusiness = ({
                   setuserData({ ...userData, address1: e.target.value });
                 }}
                 required
-              />
-            </div>
-            <div className="col-6">
-              <label className={style.label}>Unit</label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Address2"
-                name="address2"
-                value={userData.address2 || business.address2 || ""}
-                onChange={(e) => {
-                  setuserData({ ...userData, address2: e.target.value });
-                }}
               />
             </div>
           </div>
@@ -490,7 +492,7 @@ const FormAddBusiness = ({
               aria-hidden="true"
             ></span>
           )}
-          &nbsp;&nbsp;{edit ? "Edit " :"Add "} My Business
+          &nbsp;&nbsp;{edit ? "Update " :"Add "} My Business
         </button>
         <button
           type="button"

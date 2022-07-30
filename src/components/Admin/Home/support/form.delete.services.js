@@ -32,9 +32,12 @@ function DeleteModal({openModal, handleClose, data, serviceId, id}) {
       toast.error(errors)
     }
     if(success){
-      toast.success(success);
+      // toast.success(success);
       handleClose();
-      history.push(`/admin/business/${id}`);
+      // history.push(`/admin/business/${id}`);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000)
     }
   },[errors, success])
   return (

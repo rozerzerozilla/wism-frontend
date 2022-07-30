@@ -51,7 +51,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
       <div className="mb-3">
         <div className="row">
           <div className="col-12">
-            <label className={style.label}>Description <span className="text-danger">*</span></label>
+            <label className={style.label}>Description </label>
             <textarea
               placeholder="Service Description(60 chars max)"
               name="description"

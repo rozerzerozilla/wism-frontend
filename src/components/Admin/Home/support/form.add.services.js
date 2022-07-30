@@ -5,7 +5,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
       <div className="mb-3">
         <div className="row">
           <div className="col-4">
-            <label className={style.label}>Service Name</label>
+            <label className={style.label}>Service Name *</label>
             <input
               type="text"
               className="form-control"
@@ -19,7 +19,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
             />
           </div>
           <div className="col-4">
-            <label className={style.label}>Token Prefix</label>
+            <label className={style.label}>Token Prefix *</label>
             <input
               type="text"
               className="form-control"
@@ -33,7 +33,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
             />
           </div>
           <div className="col-4">
-            <label className={style.label}>Default Service Time</label>
+            <label className={style.label}>Default Service Time *</label>
             <input
               type="text"
               className="form-control"

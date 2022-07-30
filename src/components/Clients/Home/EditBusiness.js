@@ -423,6 +423,9 @@ const EditBusiness = () => {
                     postalLocalities={postal_localities}
                     success={success}
                     business={business}
+                    handleBackRoute={()=>{
+                      history.goBack()
+                    }}
                     edit={true}
                   />
                 </div>

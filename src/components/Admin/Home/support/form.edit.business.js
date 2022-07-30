@@ -333,7 +333,7 @@ const FormEditBusiness = ({
 
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Unit</label>
+              <label className={style.label}>Unit *</label>
               <input
                 type="text"
                 className="form-control"

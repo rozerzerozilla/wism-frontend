@@ -136,7 +136,7 @@ export const deleteData = (type, url, setErrors, setSuccess, setIsLoading) => as
     const { data } = await APIs.deleteData(url);
     dispatch({ type: type, payload: data });
     setIsLoading(false);
-    //toast.success("data deleted successfully!")
+    toast.success("data deleted successfully!")
     setSuccess("data delete successfully!");
   } catch (error) {
     //toast.error(error.response.data.error.message)

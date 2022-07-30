@@ -163,6 +163,8 @@ const AdminAddBusiness = () => {
     }
   };
 
+  useEffect(() => { getSubcategories("") }, []);
+
   //add the client
   const onSubmit = (event) => {
     event.preventDefault();
@@ -227,6 +229,7 @@ const AdminAddBusiness = () => {
       )
     );
     // setuserData({});
+    subcategories = [];
     window.scrollTo(0, 0);
   };
 

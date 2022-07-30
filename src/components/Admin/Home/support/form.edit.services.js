@@ -59,7 +59,12 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
                 setIsLoading
             )
         );
-        history.push(`/admin/business/${id}`);
+        // history.push(`/admin/business/${id}`);
+        setTimeout(()=>{ 
+
+            window.location.reload()
+        },2000);
+
     }
 
     useEffect(() => {
@@ -78,7 +83,7 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
               <div className="mb-3">
                   <div className="row">
                       <div className="col-12">
-                          <label >Service Name</label>
+                          <label >Service Name *</label>
                           <input
                               type="text"
                               className="form-control"
@@ -93,7 +98,7 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
                           />
                       </div>
                       <div className="col-12">
-                          <label >Prefix</label>
+                          <label >Prefix *</label>
                           <input
                               type="text"
                               className="form-control"
@@ -108,7 +113,7 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
                           />
                       </div>
                       <div className="col-12">
-                          <label >Service Time</label>
+                          <label >Service Time *</label>
                           <input
                               type="text"
                               className="form-control"
@@ -134,7 +139,6 @@ function EditServices({ openModal, handleClose, serviceId, services, id }) {
                                   ...prevState,
                                   description: e.target.value
                               }))}
-                              required
                           />
                       </div>
                       <div className="col-5">

@@ -38,7 +38,8 @@ const ClientAddService = () => {
     );
     setUserData({});
     //window.location.reload();
-    history.push("/clients/services");
+    // history.push("/clients/services");
+    history.goBack()
   };
 
   const validateForm = () => {

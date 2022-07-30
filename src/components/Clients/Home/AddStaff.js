@@ -51,7 +51,10 @@ const AddStaff = () => {
     );
     // setUserData({});
     //window.location.reload();
-    history.push("/clients/staffs");
+    // history.push("/clients/staffs");
+    history.goBack()
+
+
   };
 
   const validateForm = () => {

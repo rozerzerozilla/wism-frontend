@@ -32,7 +32,7 @@ function DeleteModal({openModal, handleClose, data, staffId, id}) {
       toast.error(errors)
     }
     if(success){
-      toast.success('Staff Deleted Successfully');
+      // toast.success('Staff Deleted Successfully');
 
       handleClose();
       Actions.getData(

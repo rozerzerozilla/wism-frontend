@@ -39,6 +39,15 @@ const AdminSubCategories = () => {
     return state.admin.subcategories;
   });
 
+
+
+  // notify messages
+  const subcategoryUpdated = () => toast.success('Subcategory updated successfully');
+  const subcategoryDeleted = () => toast.success('Subcategory deleted');
+  const SubcategoryError = (action) => toast.error(`Error! failed to ${action} subcategory`);
+  const subcategoryAdded = () => toast.success('Sub category added successfully');
+  const InputFieldError = (fieldname) => toast.error(`Error! enter valid ${fieldname}`);
+
   const openEdit = (subid, subcat, cat, catid) => {
     setEdit(true);
     setSubcatId(subid)
@@ -55,10 +64,11 @@ const AdminSubCategories = () => {
     setEdit(false);
   }
 
-  const openDelete = (subid, subcat) => {
+  const openDelete = (subid, subcat, cat) => {
     setDeletesubcat(true);
     setSubcatId(subid)
     setSubcatname(subcat)
+    setCatname(cat)
     // setCatId(catid)
 
   }
@@ -69,7 +79,8 @@ const AdminSubCategories = () => {
   }
 
   const submitDelete = () => {
-
+    // alert(success);
+    // alert(errors);
     setDeletesubcat(false);
     dispatch(
       Actions.deleteData(
@@ -81,32 +92,35 @@ const AdminSubCategories = () => {
         setIsLoading
       )
     );
+
     // setIsLoading(false);
-    if (errors) {
-      SubcategoryError("delete");
+    if (success) {
+
+      subcategoryDeleted()
+      // dispatch(
+      //   Actions.getData(
+      //     ActionTypes.GET_SUBCATEGORIES,
+      //     "/home/subcategories",
+      //     setErrors,
+      //     setIsLoading
+      //   )
+      // );
+      // setTimeout(()=>{
+
+      //   window.location.reload()
+      // },3000);
     }
     else {
-      subcategoryDeleted()
-      dispatch(
-        Actions.getData(
-          ActionTypes.GET_SUBCATEGORIES,
-          "/home/subcategories",
-          setErrors,
-          setIsLoading
-        )
-      );
+      SubcategoryError("delete");
+     
     }
+
     // setCatId(null)
     setSubcatId(null)
     setSubcatname("")
   }
 
-  // notify messages
-  const subcategoryUpdated = () => toast.success('Subcategory updated successfully');
-  const subcategoryDeleted = () => toast.success('Subcategory deleted');
-  const SubcategoryError = (action) => toast.error(`Error! failed to ${action} subcategory`);
-  const subcategoryAdded = () => toast.success('Sub category added successfully');
-  const InputFieldError = (fieldname) => toast.error(`Error! enter valid ${fieldname}`);
+
 
   const addSubCategory = (event) => {
     event.preventDefault();
@@ -129,10 +143,10 @@ const AdminSubCategories = () => {
         )
       );
 
-      if (errors == true) {
+      if (errors === true) {
         SubcategoryError("update")
       }
-      else if (success == true) {
+      else{
         	subcategoryAdded();
         }
 
@@ -330,7 +344,7 @@ const AdminSubCategories = () => {
                                     onClick={() => openEdit(subcategory.id, subcategory.name, subcategory.category, subcategory.category_id)}
                                   />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                   <MdDelete style={{ cursor: "pointer" }} size={20}
-                                    onClick={(e) => openDelete(subcategory.id, subcategory.name)}
+                                    onClick={(e) => openDelete(subcategory.id, subcategory.name,subcategory.category)}
                                     className="text-danger" />
                                 </p>
                               </td>
@@ -402,7 +416,7 @@ const AdminSubCategories = () => {
       {/* Delete modal */}
       <Modal open={deletesubcat} onClose={closeDelete} center>
         <br />
-        <h5>Are you sure you want to delete <br />subcategory: {subcatname} ?</h5>
+        <h5>Are you sure you want to delete <br />{catname} - {subcatname} ?</h5>
 
         <form
           className="mx-4 my-4"
@@ -419,7 +433,7 @@ const AdminSubCategories = () => {
             </div>
             <div className="col-6">
               <button
-                type="submit"
+                type="button"
                 className="btn btn-danger"
                 onClick={submitDelete}
               >

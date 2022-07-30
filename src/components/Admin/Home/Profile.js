@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import AdminFooter from "./layout/admin.footer";
 import AdminHeader from "./layout/admin.header";
 import AdminNavMenu from "./layout/admin.navmenu";
@@ -10,6 +11,7 @@ import { profile } from "../../../helpers/admin.joi";
 import { toast } from "react-toastify";
 const AdminProfile = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const profileData = useSelector((state) => state.admin.profile);
   const [isLoading, setIsLoading] = useState(true);
   const [errors, setErrors] = useState(false);
@@ -28,16 +30,23 @@ const AdminProfile = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const validInputs = validateForm();
-    if (!validInputs) return null;
     const formData = new FormData();
     if (selectedImage) {
       formData.append("image", selectedImage, selectedImage.name);
     }
-    if (userData.newPassword !== userData.repeatPassword) {
+    
+    if (userData.password === userData.newPassword) {
+      toast.error("Your old password should not be the same as your new password");
+      return
+    }
+    if (userData.newPassword != userData.repeatPassword) {
       toast.error("Password didn't match");
       return
     }
+    
+    const validInputs = validateForm();
+    if (!validInputs) return null;
+
     formData.append("id", event.target.elements.id.value);
     formData.append("name", userData.name);
     formData.append("email", userData.email);
@@ -77,6 +86,20 @@ const AdminProfile = () => {
       )
     );
   }, [dispatch]);
+
+  useEffect(()=>{
+    if(errors){
+
+        toast.error('Old password is wrong!')
+    }
+    if(success){
+      toast.success('Profile Data Updated Successfully!');
+      // var localData = localStorage.getItem('userData');
+      // localData["name"] = userData.name;
+      // localStorage.setItem('userData', JSON.stringify(localData));
+      history.push(`dashboard`);
+    }
+  },[errors, success])
 
   return (
     <>

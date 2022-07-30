@@ -9,6 +9,8 @@ import ActionTypes from "../../../helpers/action.types";
 import { AddBusiness } from "../../../helpers/admin.joi";
 import * as Actions from "../../../redux/actions/admin.actions";
 import { Redirect, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const AdminEditBusiness = () => {
   const history = useHistory();
   const { id, ...rest } = useParams();
@@ -235,6 +237,11 @@ const AdminEditBusiness = () => {
         setIsLoading
       )
     );
+//  console.log(success)
+    if(!(errors)){
+      toast.success("Business Updated Successfully");
+      history.push(`/admin/business/${id}`);
+    }
     // setuserData({});
     // window.scrollTo(0, 0);
   };
@@ -422,7 +429,7 @@ const AdminEditBusiness = () => {
 
         <AdminFooter />
       </main>
-      {success && <Redirect to={`/admin/business/${id}`}/>}
+      {/* {success && function(){ setTimeout( <Redirect to={`/admin/business/${id}`}/>,3000)}} */}
     </>
   );
 };

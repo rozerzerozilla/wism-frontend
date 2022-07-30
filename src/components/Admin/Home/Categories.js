@@ -100,7 +100,8 @@ const AdminCategories = () => {
   }
 
   const submitDelete = () => {
-
+    // event.preventDefault();
+    // setIsLoading(false);
     setDeletecat(false);
     dispatch(
       Actions.deleteData(
@@ -119,17 +120,17 @@ const AdminCategories = () => {
     else {
       categoryDeleted();
       setTimeout(() => {
-        
-        
-        dispatch(
-          Actions.getData(
-            ActionTypes.GET_CATEGORIES,
-            "/home/categories",
-          setErrors,
-          setIsLoading
-        )
-        );
-      },2000);
+        window.location.reload()
+      }, 3000)
+
+        // dispatch(
+        //   Actions.getData(
+        //     ActionTypes.GET_CATEGORIES,
+        //     "/home/categories",
+        //   setErrors,
+        //   setIsLoading
+        // )
+        // );
       }
     setCatId(null)
     setCatname("")
