@@ -53,7 +53,8 @@ const AdminFormUpdateProfile = ({
               className="form-control"
               placeholder="Your name"
               name="name"
-              value={userData.name ? userData.name : profileData.name || ""}
+              value={userData.name ? userData.name :  profileData.name  ||  "" }
+              // value={userData.name  ||  profileData.name  || "" }
               onChange={(e) =>
                 setUserData({ ...userData, name: e.target.value })
               }
@@ -66,6 +67,7 @@ const AdminFormUpdateProfile = ({
               placeholder="Your Email"
               name="name"
               value={userData.email ? userData.email : profileData.email || ""}
+              // value={userData.email  ||  profileData.email  || "" }
               onChange={(e) =>
                 setUserData({ ...userData, email: e.target.value })
               }

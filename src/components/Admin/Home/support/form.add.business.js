@@ -265,7 +265,7 @@ const FormAddBusiness = ({
           
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Postal Code *</label>
+              <label className={style.label}>Postal Code <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -280,7 +280,7 @@ const FormAddBusiness = ({
               />
             </div>
             <div className="col-6">
-              <label className={style.label}>Choose Postal Localities *</label>
+              <label className={style.label}>Choose Postal Localities <span className="text-danger">*</span></label>
               {/* <input
                 type="text"
                 className="form-control"
@@ -307,7 +307,7 @@ const FormAddBusiness = ({
               </select>
             </div>
             <div className="col-6">
-              <label className={style.label}>City *</label>
+              <label className={style.label}>City <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -333,7 +333,7 @@ const FormAddBusiness = ({
               </select> */}
             </div>
             <div className="col-6">
-              <label className={style.label}>State *</label>
+              <label className={style.label}>State <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -361,7 +361,7 @@ const FormAddBusiness = ({
           </div>
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Unit *</label>
+              <label className={style.label}>Unit <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"

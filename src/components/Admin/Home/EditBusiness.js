@@ -168,8 +168,8 @@ const AdminEditBusiness = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    // const validInputs = validateForm();
-    // if (!validInputs) return null;
+    const validInputs = validateForm();
+    if (!validInputs) return null;
     // console.log(userData);
     const formData = new FormData();
     formData.append("bname", userData.bname || business.bname);

@@ -55,7 +55,8 @@ const FormEditBusiness = ({
               className="form-control"
               placeholder="Telephone"
               name="telephone"
-              value={userData.telephone || business.telephone || ""}
+              // value={userData.telephone || business.telephone || ""}
+              value={business.telephone || "" || userData.telephone}
               onChange={(e) => {
                 setuserData({ ...userData, telephone: e.target.value });
               }}
@@ -257,7 +258,7 @@ const FormEditBusiness = ({
         <div className="mb-3">
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Postal Code *</label>
+              <label className={style.label}>Postal Code <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -272,7 +273,7 @@ const FormEditBusiness = ({
               />
             </div>
             <div className="col-6">
-              <label className={style.label}>Choose Postal Localities *</label>
+              <label className={style.label}>Choose Postal Localities <span className="text-danger">*</span></label>
               {/* <input
                 type="text"
                 className="form-control"
@@ -300,7 +301,7 @@ const FormEditBusiness = ({
               <label>Current street - {business.street}</label>
             </div>
             <div className="col-6">
-              <label className={style.label}>City *</label>
+              <label className={style.label}>City <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -315,7 +316,7 @@ const FormEditBusiness = ({
               />
             </div>
             <div className="col-6">
-              <label className={style.label}>State *</label>
+              <label className={style.label}>State <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"
@@ -333,7 +334,7 @@ const FormEditBusiness = ({
 
           <div className="row">
             <div className="col-6">
-              <label className={style.label}>Unit *</label>
+              <label className={style.label}>Unit <span className="text-danger">*</span></label>
               <input
                 type="text"
                 className="form-control"

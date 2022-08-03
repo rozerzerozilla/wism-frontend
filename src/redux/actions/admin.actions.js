@@ -138,6 +138,7 @@ export const deleteData = (type, url, setErrors, setSuccess, setIsLoading) => as
     setIsLoading(false);
     toast.success("data deleted successfully!")
     setSuccess("data delete successfully!");
+    setErrors(false);
   } catch (error) {
     //toast.error(error.response.data.error.message)
     if (error.response) {

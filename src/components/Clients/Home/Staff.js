@@ -21,22 +21,7 @@ const ClientStaff = () => {
   const dispatch = useDispatch();
   var staffs;
   staffs = useSelector((state) => state.clients.staffs);
-  useEffect(() => {
-    dispatch(
-      Actions.getData(
-        ActionTypes.GET_CLIENT_STAFFS,
-        "/home/staff",
-        setErrors,
-        setIsLoading
-      )
-    );
-    return () => {
-      dispatch({
-        type: ActionTypes.GET_CLIENT_STAFFS,
-        payload: [],
-      })
-    }
-  }, [dispatch, window.location]);
+
 
   //disable or enable staffs
   const toggleStaff = (checked, id) => {
@@ -60,15 +45,15 @@ const ClientStaff = () => {
     );
   };
 
-  useEffect(() => {
-    if(errors !== null && errors !== ""){
-      toast.error(errors)
-    }
+  // useEffect(() => {
+  //   if(errors !== null && errors !== ""){
+  //     toast.error(errors)
+  //   }
 
-    if (success !== null && success !== "") {
-      toast.success(success)
-    }
-  },[errors, success])
+  //   if (success !== null && success !== "") {
+  //     toast.success(success)
+  //   }
+  // },[errors, success])
 
   const submitDelete = () => {
     dispatch(
@@ -81,15 +66,37 @@ const ClientStaff = () => {
       )
     );
     setOpenDeleteModal(false)
-    setTimeout(()=>{dispatch(
+
+    setTimeout(()=>{
+      dispatch(
       Actions.getData(
         ActionTypes.GET_CLIENT_STAFFS,
         "/home/staff",
         setErrors,
         setIsLoading
       )
-    );}, 500)
+    );
+  }, 3000)
+
   }
+
+  useEffect(() => {
+    dispatch(
+      Actions.getData(
+        ActionTypes.GET_CLIENT_STAFFS,
+        "/home/staff",
+        setErrors,
+        setIsLoading
+      )
+    );
+    // return () => {
+    //   dispatch({
+    //     type: ActionTypes.GET_CLIENT_STAFFS,
+    //     payload: [],
+    //   })
+    // }
+  // }, [dispatch, window.onload]);
+}, [dispatch, window.location]);
 
   return (
     <>

@@ -97,18 +97,18 @@ const AdminSubCategories = () => {
     if (success) {
 
       subcategoryDeleted()
-      // dispatch(
-      //   Actions.getData(
-      //     ActionTypes.GET_SUBCATEGORIES,
-      //     "/home/subcategories",
-      //     setErrors,
-      //     setIsLoading
-      //   )
-      // );
-      // setTimeout(()=>{
+      dispatch(
+        Actions.getData(
+          ActionTypes.GET_SUBCATEGORIES,
+          "/home/subcategories",
+          setErrors,
+          setIsLoading
+        )
+      );
+      setTimeout(()=>{
 
-      //   window.location.reload()
-      // },3000);
+        window.location.reload()
+      },3000);
     }
     else {
       SubcategoryError("delete");

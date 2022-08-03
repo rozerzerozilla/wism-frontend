@@ -102,15 +102,15 @@ const DisplayBusiness = ({ details, id }) => {
               <div className="card-body p-3">
                 <ul className="list-group">
                   <li className="list-group-item border-0 ps-0 pt-0 text-sm">
-                    <strong className="text-dark">Address1:</strong> &nbsp;
+                    <strong className="text-dark">Unit:</strong> &nbsp;
                     {details.address1}
                   </li>
                   <li className="list-group-item border-0 ps-0 pt-0 text-sm">
-                    <strong className="text-dark">Address2:</strong> &nbsp;
+                    <strong className="text-dark">Street:</strong> &nbsp;
                     {details.address2}
                   </li>
                   <li className="list-group-item border-0 ps-0 pt-0 text-sm">
-                    <strong className="text-dark">Street:</strong> &nbsp;
+                    <strong className="text-dark">Postal Locality:</strong> &nbsp;
                     {details.street}
                   </li>
                   <li className="list-group-item border-0 ps-0 pt-0 text-sm">

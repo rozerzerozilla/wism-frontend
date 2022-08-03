@@ -77,8 +77,16 @@ const ClientCustomForm = () => {
   useEffect(() => {
     if(success) {
       setOpenModal(false)
+      setSuccess(false);
     }
   },[success])
+
+  useEffect(() => {
+    if(errors) {
+      setOpenModal(false)
+      setSuccess(false);
+    }
+  },[errors])
 
   const removeField = (id) => {
     dispatch(
@@ -138,6 +146,7 @@ const ClientCustomForm = () => {
         <ClientsFooter />
       </main>
       <Modal open={openModal} onClose={()=>setOpenModal(false)} center>
+      <h5>Add Custom Form Field</h5>
         <form onSubmit={onSubmit} className="mx-4 my-4">
           <div className="mb-3">
             <div className="row">

@@ -61,10 +61,10 @@ const DisplayEmployees = ({ staff }) => {
       InvalidEmployeeError("employee phone");
       setIsLoading(false);
     }
-    else if (!validator.isEmail(userData.email) || userData.email === "") {
-      InvalidEmployeeError("employee email");
-      setIsLoading(false);
-    }
+    // else if (!validator.isEmail(userData.email) || userData.email === "") {
+    //   InvalidEmployeeError("employee email");
+    //   setIsLoading(false);
+    // }
     else if (userData.name.includes(" ") || userData.name.includes("")) {
       setEdit(false);
       axios.patch(`https://api.wism.in/api/admin/home/employee/${staff.id}`, { ...userData }).then(res => {
