@@ -39,8 +39,12 @@ const ClientAddService = () => {
     setUserData({});
     // console.log(errors);
     //window.location.reload();
-    // history.push("/clients/services");
-    history.goBack()
+    setTimeout(() => {
+      history.push("/clients/services");
+      
+    }, 3000);
+    // window.location.href = '/clients/services';
+    // history.goBack()
   };
 
   const validateForm = () => {
@@ -53,14 +57,24 @@ const ClientAddService = () => {
     return results.value;
   };
 
-  useEffect(() => {
-    if (success !== false && success !== "" && success !== null) {
-      toast.error(success)
-    }
-    if(errors !== false && errors !== "" && errors !== null) {
-      toast.error(errors)
-    }
-  },[success, errors])
+  // useEffect(() => {
+  //   if (success !== false && success !== "" && success !== null) {
+  //     toast.success(success)
+  //   }
+  //   if(errors !== false && errors !== "" && errors !== null) {
+  //     toast.error(errors)
+  //   }
+  // },[success, errors])
+
+  // useEffect(() => {
+  //   // console.log(success);
+  //   if (success) {
+  //     toast.success(success)
+  //   }
+  //   if(errors) {
+  //     toast.error(errors)
+  //   }
+  // },[success, errors])
 
   return (
     <>

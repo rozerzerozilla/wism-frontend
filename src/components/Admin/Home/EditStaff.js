@@ -34,6 +34,10 @@ const EditBusinessStaff = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    // if (userData.email === null ) {
+    //   userData.email = "";
+    // }
     const validInputs = validateForm();
     if (!validInputs) return null;
 
@@ -62,6 +66,7 @@ const EditBusinessStaff = () => {
 
   const validateForm = () => {
     const results = AddBStaffs.validate(userData);
+    console.log(results);
     if (results.error) {
       toast.error(results.error.details[0].message);
       return false;

@@ -90,7 +90,7 @@ const BusinessDetails = ({
                     <li>
                       <p>
                         <strong>
-                          <i className="lni-archive"></i> Specilised:
+                          <i className="lni-archive"></i> Specialized:
                         </strong>
                         {business.subcats &&
                           business.subcats.map((sc) => (

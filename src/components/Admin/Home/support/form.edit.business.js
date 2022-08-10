@@ -55,8 +55,8 @@ const FormEditBusiness = ({
               className="form-control"
               placeholder="Telephone"
               name="telephone"
-              // value={userData.telephone || business.telephone || ""}
-              value={business.telephone || "" || userData.telephone}
+              value={userData.telephone || business.telephone || ""}
+              // value={business.telephone || "" || userData.telephone}
               onChange={(e) => {
                 setuserData({ ...userData, telephone: e.target.value });
               }}

@@ -8,7 +8,7 @@ function PincodeDetails({ open, handleClose, handleSubmitPincode }) {
     }
   return (
       <Modal open={open} onClose={handleClose} center>
-          <h5>Change your location</h5>
+          <h5>Please enter a pin code</h5>
           <br />
           <div className="row">
               <div className="col-12 mb-3">

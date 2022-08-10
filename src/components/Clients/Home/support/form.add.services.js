@@ -35,7 +35,7 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
           <div className="col-4">
             <label className={style.label}>Default Service Time <span className="text-danger">*</span></label>
             <input
-              type="text"
+              type="number"
               className="form-control"
               placeholder="Default Service Time(in mins)"
               name="service_time"
@@ -43,6 +43,8 @@ const FormAddServices = ({ onSubmit, userData, setUserData, isLoading }) => {
               onChange={(e) => {
                 setUserData({ ...userData, service_time: e.target.value });
               }}
+              min={10}
+              max={1000}
               required
             />
           </div>

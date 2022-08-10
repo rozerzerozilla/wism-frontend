@@ -26,6 +26,11 @@ const AdminAddService = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (userData.description === null || userData.description === '' ) {
+      userData.description = "";
+    }
+
     const validInputs = validateForm();
     if (!validInputs) return null;
     setIsLoading(true);
@@ -44,11 +49,14 @@ const AdminAddService = () => {
   };
 
   const validateForm = () => {
+   
     const results = AddService.validate(userData);
+    console.log(results);
     if (results.error) {
       toast.error(results.error.details[0].message)
       return false;
     }
+
     setErrors(null);
     return results.value;
   };

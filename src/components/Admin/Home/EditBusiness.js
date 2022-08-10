@@ -145,12 +145,13 @@ const AdminEditBusiness = () => {
   }
 
   const getSubcategories = (id) => {
-    // console.log(id)
+    // alert(id)
     if (id !== "") {
       dispatch(
         Actions.getPData(
           ActionTypes.GET_SUBCATEGORY,
           `/subcategories/${id}`,
+          // `/subcategories/9`,
           setErrors,
           setIsLoading
         )
@@ -167,7 +168,7 @@ const AdminEditBusiness = () => {
   //add the client
   const onSubmit = (event) => {
     event.preventDefault();
-
+    // alert('hello');
     const validInputs = validateForm();
     if (!validInputs) return null;
     // console.log(userData);

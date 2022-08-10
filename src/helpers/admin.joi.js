@@ -18,7 +18,8 @@ export const Login = Joi.object({
 
 export const AddService = Joi.object({
   name: Joi.string().required().min(3).max(20).trim(),
-  description: Joi.string().required().min(6).max(60).trim(),
+  // description: Joi.string().required().min(6).max(60).trim(),
+  description: Joi.string().allow('').trim(),
   prefix: Joi.string().trim().required().max(1),
   service_time: Joi.number().required(),
   business_id: Joi.any(),
