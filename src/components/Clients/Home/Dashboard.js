@@ -27,7 +27,7 @@ const ClientDashboard = () => {
       <ClientsNavMenu path="dashboard" />
       <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
         <ClientsHeader header="Dashboard" />
-        <div className="container mt-4">
+        <div className="container mt-4 content-view">
           <div className="row">
             <div className="col-12">
               <div className="card mb-4">

@@ -126,7 +126,7 @@ const FormEditBusiness = ({
               <>
                 <b>Selected : </b>
                 {business.subcats.map((sb) => (
-                  <b>{sb.name}, </b>
+                  <b key={sb.name} >{sb.name}, </b>
                 ))}
               </>
             )}

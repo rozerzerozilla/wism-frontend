@@ -168,10 +168,13 @@ const AdminEditBusiness = () => {
   //add the client
   const onSubmit = (event) => {
     event.preventDefault();
+    console.log("after click");
+
     // alert('hello');
     const validInputs = validateForm();
-    if (!validInputs) return null;
-    // console.log(userData);
+    // if (!validInputs) return null;
+    console.log("before validate");
+
     const formData = new FormData();
     formData.append("bname", userData.bname || business.bname);
     formData.append("telephone", userData.telephone || business.telephone);
@@ -227,7 +230,7 @@ const AdminEditBusiness = () => {
     );
     setIsLoading(true);
     formData.forEach(ele => console.log(ele))
-    
+
     dispatch(
       Actions.postData(
         ActionTypes.POST_CLIENT_BUSINESS,
@@ -238,8 +241,8 @@ const AdminEditBusiness = () => {
         setIsLoading
       )
     );
-//  console.log(success)
-    if(!(errors)){
+    //  console.log(success)
+    if (!(errors)) {
       toast.success("Business Updated Successfully");
       history.push(`/admin/business/${id}`);
     }
@@ -312,7 +315,7 @@ const AdminEditBusiness = () => {
           });
         }
       });
-    } catch (e) {}
+    } catch (e) { }
   }, [dispatch]);
 
   useEffect(() => {
@@ -324,9 +327,9 @@ const AdminEditBusiness = () => {
       setAllTime(business?.open_all_time)
     }
     const datas = { ...userData }
-    
+
     if (business?.timings) {
-      
+
       datas.monday.monday_work_from = business?.timings[0]?.work_from || "";
       datas.monday.monday_work_to = business?.timings[0]?.work_to || "";
       datas.monday.monday_break_from =
@@ -418,7 +421,7 @@ const AdminEditBusiness = () => {
                     success={success}
                     business={business}
                     postalLocalities={postal_localities}
-                    handleBackRoute={()=>{
+                    handleBackRoute={() => {
                       history.goBack()
                     }}
                   />
