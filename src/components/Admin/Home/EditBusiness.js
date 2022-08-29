@@ -168,12 +168,12 @@ const AdminEditBusiness = () => {
   //add the client
   const onSubmit = (event) => {
     event.preventDefault();
-    console.log("after click");
+    // console.log("after click");
 
     // alert('hello');
     const validInputs = validateForm();
     // if (!validInputs) return null;
-    console.log("before validate");
+    // console.log("before validate");
 
     const formData = new FormData();
     formData.append("bname", userData.bname || business.bname);
@@ -244,7 +244,8 @@ const AdminEditBusiness = () => {
     //  console.log(success)
     if (!(errors)) {
       toast.success("Business Updated Successfully");
-      history.push(`/admin/business/${id}`);
+      // history.push(`/admin/business/${id}`);
+      window.location.href = `/admin/business/${id}`;
     }
     // setuserData({});
     // window.scrollTo(0, 0);

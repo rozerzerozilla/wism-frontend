@@ -41,7 +41,8 @@ const FormEditBusiness = ({
               className="form-control"
               placeholder="Business Name (Ex: Trendz Men Saloon)"
               name="bname"
-              value={userData.bname || business.bname || ""}
+              defaultValue={business.bname}
+              // value={userData.bname || business.bname || ""}
               onChange={(e) => {
                 setuserData({ ...userData, bname: e.target.value });
               }}
@@ -55,8 +56,9 @@ const FormEditBusiness = ({
               className="form-control"
               placeholder="Telephone"
               name="telephone"
-              value={userData.telephone || business.telephone || ""}
-              // value={business.telephone || "" || userData.telephone}
+              defaultValue={business.telephone}
+              // value={"" || business.telephone}
+              // value={ "" || userData.telephone || business.telephone}
               onChange={(e) => {
                 setuserData({ ...userData, telephone: e.target.value });
               }}
@@ -70,7 +72,8 @@ const FormEditBusiness = ({
               className="form-control"
               placeholder="Website"
               name="website"
-              value={userData.website || business.website || ""}
+              defaultValue={business.website}
+              // value={userData.website || business.website || ""}
               onChange={(e) => {
                 setuserData({ ...userData, website: e.target.value });
               }}
@@ -264,7 +267,8 @@ const FormEditBusiness = ({
                 className="form-control"
                 placeholder="Postal Code"
                 name="postalcode"
-                value={userData.postalcode || business.postalcode || ""}
+                defaultValue={business.postalcode}
+                // value={userData.postalcode || business.postalcode || ""}
                 onChange={(e) => {
                   setuserData({ ...userData, postalcode: e.target.value });
                   getLatLng(e.target.value);
@@ -287,7 +291,7 @@ const FormEditBusiness = ({
               <select
                 required
                 className="form-control"
-                value={userData.street || business.street || ""}
+                value={ userData.street || business.street ||  ""}
                 defaultValue={business.street || ""}
                 name="street"
                 disabled={postalLocalities?.length <= 0}
@@ -296,7 +300,7 @@ const FormEditBusiness = ({
                 }}
               >
                 <option value="">Choose localities</option>
-                {postalLocalities?.map((ele, idx) => <option value={ele} key={idx}>{ele}</option>)}
+                {postalLocalities?.map((ele, idx) => <option value={ele} key={idx}>{ele}</option> )}
               </select>
               <label>Current street - {business.street}</label>
             </div>
@@ -340,7 +344,8 @@ const FormEditBusiness = ({
                 className="form-control"
                 placeholder="Address1"
                 name="address1"
-                value={userData.address1 || business.address1 || ""}
+                defaultValue={business.address1}
+                // value={userData.address1 || business.address1 || ""}
                 onChange={(e) => {
                   setuserData({ ...userData, address1: e.target.value });
                 }}
